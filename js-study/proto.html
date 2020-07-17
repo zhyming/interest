@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>对象原型</title>
+</head>
+<body>
+    <h1>对象类的共有区域</h1>
+    <script type="text/javascript">
+
+        function Persion(name, age){
+            this.name = name;
+            this.age = age;
+
+            this.sayName = function () {
+                alert(this.name);
+
+            };
+        }
+
+        Persion.prototype.address = "广西";
+
+        var p1 = new Persion("张三", 12);
+        var p2 = new Persion("李四", 33);
+
+        Persion.prototype.toString = function(){
+            return "Persion[name = "+this.name+", age = "+this.age+"]";
+        }
+
+        for (var v in p1){
+            console.log(p1[v]);
+        }
+
+        /*
+       console.log(p1.toString());
+       console.log(p2.toString());
+
+       console.log(p1.__proto__.__proto__.hasOwnProperty("toString"));*/
+
+    </script>
+
+
+</body>
+</html>

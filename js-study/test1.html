@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+</head>
+<body>
+    <h1>测试</h1>
+
+    <script>
+
+        function Persion(name, age){
+            this.name = name;
+            this.age = age;
+        }
+
+        let p1 = new Persion("1234", 12);
+        let p2 = new Persion("222", 66);
+        let p3 = new Persion("333", 33);
+        let p4 = new Persion("444", 5);
+        let p5 = new Persion("555", 11);
+        let p6 = new Persion("666", 22);
+
+        var arr = [p1, p2, p3, p4, p5, p6];
+
+        function getAdult(array){
+
+            let newArr = [];
+            for (let a in  array){
+                if (array[a].age > 18){
+                    newArr.push(array[a]);
+                }
+            }
+
+            return newArr;
+        }
+
+        const newArr = getAdult(arr);
+
+
+        console.log(newArr);
+
+    </script>
+</body>
+</html>
