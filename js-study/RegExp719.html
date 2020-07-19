@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>正则表达式</title>
+</head>
+<body>
+
+    <h1>正则表达式</h1>
+
+    <script>
+
+        //let reg = new RegExp("a", "i");
+        /*let reg = /a/i;
+        console.log(typeof reg);
+        console.log(reg.test("abc"));*/
+
+        // | 表示或者
+        /*let reg = /a|b/;
+
+        console.log(reg.test("ab"));*/
+
+        //中括号[] 里头的内容也表示或的关系
+       /* let reg = /[abcdef]/;
+
+        console.log(reg.test("f"));
+
+        //[a-z] 任意小写字母 ，[A-Z] 任意大写字母
+        //[A-z] 任意字母
+        let reg2 = /[A-z]/;
+
+        console.log(reg2.test("F"));
+
+        let reg3 = /a-z/;
+
+        console.log(reg3.test("a-z"));*/
+
+        /*let reg = /[abc|adc|aec]/;
+
+        console.log(reg.test("aec"))
+
+        let reg2 = /a[bde]c/
+        console.log(reg.test("aeec"))*/
+
+
+        // ^ 除此之外 如下，除了a或b之外还有没有其它，有则true，反之false
+        /*let reg = /[^ab]/;
+
+        // [0-9] 表示任意数字
+        // [^0-9] 表示除了数字
+        console.log(reg.test("cc"));*/
+
+        // let reg = /[0-9]/;
+        // console.log(reg.test(2352352));
+
+        /**
+         * 字符串与正则表达式
+         */
+
+        /*let str = "12ss44sv421ggsagg4233tccvf";
+
+        console.log(str.split(/[A-z]/));
+
+        //search 只能查找第一个
+
+        let str2 = "hello world abc afc aoc aewc";
+        console.log(str2.search(/a[afo]c/g))
+
+        //默认只查找第一个；设置全局匹配 g 可以查询所有返回结果到一个数组
+        let str3 = "12ss44sv421ggsagg4233tccvfA44F3HF3";
+        console.log(str3.match(/[a-z]/gi));
+
+        //默认只替换第一个；设置全局 g 可以替换所有
+        let rest = str.replace("s", "中");
+        console.log(rest);
+        console.log(str);
+        let rest2 = str.replace(/[A-z]/g, "");
+        console.log(rest2);*/
+
+
+
+        /**
+         * 正则量词
+         * --大括号表示出现几次
+         * --只对前边一个对象起作用
+         * --{n} 表示正好出现几次
+         * --{a,b} 表示a到b次，请注意逗号之间不能有空格
+         * --{a,} 表示a以上次,包含a次，请注意逗号之间不能有空格
+         * --用小括号()表示为一个对象
+         */
+        /*let reg = /aaa/;
+        console.log(reg.test("aaa"));*/
+        /*let reg = /ab{3}/;
+        console.log(reg.test("abbb"));
+        let reg2 = /(ab){3}/;
+        console.log(reg2.test("ababab"));
+        let reg3 = /ab{3}c/;
+        console.log(reg3.test("abbbc"));
+
+        let reg4 = /ab{1,3}c/;
+        console.log(reg4.test("abbbc"));
+
+        let reg5 = /ab{3,}c/;
+        console.log(reg5.test("abbbc"));*/
+
+        /**
+         * 量词
+         * + 至少一个 相当于{1,}
+         * * 0个或多个 相当于{0,}
+         * ? 0个或一个 相当于{0,1}
+         */
+
+        /*let reg = /ab+/;
+        console.log(reg.test("ab"));
+
+        let reg2 = /ab*!/;
+        console.log(reg2.test("ab"));
+
+        let reg3 = /ab?c/;
+        console.log(reg3.test("abc"));
+
+        */
+
+        /**
+         * 首尾规则
+         * -- ^表示以后面一个对象开头；如何这个符号在中括号[]中则表示除什么之外
+         * -- $表示以前面一个对象结尾
+         * -- ^a$ 表示完全符号
+         * -- ^a|a& 表示以a开头结尾
+         */
+
+        /*let reg = /a/;
+        console.log(reg.test("ba"));
+
+
+        let reg2 = /^a/
+        console.log(reg2.test("ab"));
+
+        let reg3 = /a$/
+        console.log(reg3.test("ba"));*/
+
+        /*let reg = /^1[3-9][0-9]{9}$/
+        console.log(reg.test("13355436534"))*/
+
+        /**
+         * 检查 .
+         */
+
+        let reg = /\\/
+
+
+        console.log(reg.test("\\"));
+
+        reg = new RegExp("\\.");
+
+        console.log(reg)
+
+        /**
+         *
+         * \w   任意字母、数字、下划线、横杆
+         * \W   除任意字母、数字、下划线外，即跟\w相反[^A-z0-9-_]
+         * \d   任意数字
+         * \D   除了任意数字，即跟\d相反[^0-9]
+         * \s   空格，space
+         * \S   除了空格，即跟\s相反
+         * \b   单词边界，可以检测到是否有一个单词，即childabc --false/child abc --true
+         * \B   除了单词边界
+         */
+
+        reg = /\W/;
+
+        console.log(reg.test("_"))
+
+        reg = /_/;
+
+        console.log(reg.test("_"));
+
+        reg = /\D/;
+
+        console.log(reg.test("abc"));
+
+        reg = /\s/
+        console.log(reg.test(" ")) ;
+        /**
+         * 创建正则，表示单词child
+         */
+
+        reg = /\bchild\b/
+        console.log(reg.test("A child sdfsd"))
+
+
+        //开启全局匹配模式，所有检测所有
+       /* let username = prompt("请输入你的名字：");
+        //替换字符串空格
+        console.log(username);
+        username = username.replace(/^(\s+)|(\s+)$/g, "");
+        console.log(username);*/
+
+        /**
+         *
+         * 电子邮件 正则
+         *
+         *
+         */
+
+        reg = /^(\w+)(\.\w+)*@[A-z\d]+(\.com)$/
+
+        console.log(reg.test("sd.fasd@a1a.com"))
+
+        reg = /A-z\d/
+        console.log(reg.test("A-z5"))
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
