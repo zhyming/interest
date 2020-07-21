@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>剩余dom操作</title>
+
+    <script type="text/javascript">
+
+        window.onload = function(){
+            let body = document.getElementsByTagName("body")[0];
+            //console.log(body);
+
+            /**
+             * document 存在一个body的引用
+             */
+
+           //console.log(document.body == body);
+
+            let documentElement = document.documentElement;
+            //console.log(documentElement);
+
+            let all = document.all;
+            //console.log(all);
+            //console.log(typeof all);
+
+            all = document.getElementsByTagName("*");
+            //console.log(all);
+
+            //document.getElementsByClassName()
+
+            let div = document.getElementsByTagName("div");
+            //console.log(div);
+
+            /**
+             * 很强 querySelector
+             * --需要一个选择器的字符串作为参赛，可以根据一个css选择器来查询一个节点对象
+             * --返回一个对象
+             * --如果满足条件的只有一个，只会返回第一个元素
+             *
+             */
+            let d = document.querySelector(".box1 div");
+            let box1 = document.querySelector(".box1");
+            //console.log(box1)
+            /**
+             * querySelectorAll 可以返回多个元素，返回一个数组
+             *
+             * @type {NodeListOf<Element>}
+             */
+            let divs = document.querySelectorAll(".box1 div");
+            console.log(divs);
+
+
+        }
+
+
+    </script>
+
+</head>
+<body>
+    <h1>剩余dom操作</h1>
+
+    <div class="box1">
+        <div>盒子1</div>
+        <div>盒子2</div>
+    </div>
+    <div>外面的盒子</div>
+</body>
+</html>
