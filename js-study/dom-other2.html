@@ -2,14 +2,100 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>dom查询其它方法 下集</title>
+    <title>dom查询增删改</title>
 
     <script type="text/javascript">
             window.onload = function(){
 
-                document.body
 
-                alert("发现跟上一个学习内容一样");
+
+                /**
+                 * dom的增删改 方法基本都是父节点进行调用
+                 *
+                //创建节点，与某节点下
+                myclick("mybtn01", function () {
+
+                    /**
+                     * 1.创建元素节点 createElement -- 传入一个标签名
+                     * 2.创建文本节点 createTextNode -- 传入文本内容
+                     */
+
+                    let li = document.createElement("li");
+
+                    let txt = document.createTextNode("广州");
+
+                    //建立父子关系 appendChild 向一个节点中添加子节点 A.appendChild(b) 则b在A下
+                    li.appendChild(txt);
+
+                    let city = document.getElementById("city");
+                    city.appendChild(li);
+
+                    //改进方法 使用html进行改进
+                    let lli = document.createElement("li");
+                    lli.innerHTML += "广州";
+
+                    city.appendChild(lli);
+
+
+
+                    /**
+                     * 将某节点插入到一节点前面
+                     * insertBefore（A, B）两个参数， A -- 插入后在前面； B--插入后在后面 即A插在B前边
+                     */
+                    let li2 = document.createElement("li");
+
+                    let txt2 = document.createTextNode("南宁");
+
+                    li2.appendChild(txt2);
+
+                    let bj = document.getElementById("bj");
+
+                    city.insertBefore(li2, bj);
+
+                /**
+                 * 替换节点
+                 *
+                 * replaceChild（A, B）两个参数， A 替换 B
+                 */
+
+
+                let li3 = document.createElement("li");
+
+                let txt3 = document.createTextNode("深圳");
+
+                city.replaceChild(li3, bj);
+
+
+
+                /**
+                 * 删除节点
+                 *
+                 * removeChild（A）
+                 *
+                 * 子节点获取父节点在用父节点删除子节点
+                 */
+
+
+
+                city.removeChild(bj);
+
+
+                bj.parentElement
+
+                /**
+                 *
+                 * @param name
+                 * @param func
+                 */
+
+                function myclick(name, func){
+
+                    let btn = document.getElementById(name);
+
+                    btn.onclick = func;
+
+                }
+
             }
 
 
