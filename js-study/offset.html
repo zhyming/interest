@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style type="text/css">
+        #bb{
+            width: 300px;
+            height: 200px;
+            color: black;
+            background-color: aquamarine;
+            overflow: auto;
+        }
+    </style>
+
+    <script type="text/javascript">
+        window.onload = function () {
+
+
+            let bb = document.getElementById("bb");
+            let sub = document.getElementById("sub");
+            let check = document.getElementById("check");
+            let info = document.getElementById("info");
+
+            //添加滚动条滚动事件
+            bb.onscroll = function () {
+                //alert("滚动");
+                if((bb.scrollHeight - bb.scrollTop) == bb.clientHeight){
+                    //alert("到底")
+                    sub.disabled = false;
+                }
+            }
+
+            sub.onclick = function () {
+
+                if (check.checked){
+                    alert("下一步");
+                }else {
+                    alert("勾选协议");
+                }
+
+            }
+
+
+        }
+
+    </script>
+</head>
+<body>
+<h2>欢迎注册</h2>
+<div id="bb">
+
+    <p id="info">请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请
+        阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明
+        阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明
+        阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明
+        阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明
+        阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明
+        阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明
+        阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明
+        阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明
+        阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明
+        阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明
+        阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明
+        阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明
+        阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明
+        阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明
+        阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明
+        阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明请阅读说明
+
+    </p>
+
+</div>
+<input type="checkbox" id="check">我已仔细阅读
+<input type="submit" id="sub" disabled="true" value="注册"/>
+
+</body>
+</html>
