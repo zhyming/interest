@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>显示鼠标坐标</title>
+
+
+    <style type="text/css">
+
+        div{
+            border: 1px solid;
+        }
+
+        #areaDiv{
+            width: 400px;
+            height: 200px;
+        }
+        #showMsg{
+            margin-top: 10px;
+            width: 400px;
+            height: 50px;
+        }
+
+        #box1{
+            background-color: red;
+            width: 50px;
+            height: 50px;
+        }
+
+    </style>
+
+    <script type="text/javascript">
+
+        window.onload = function(){
+
+            /**
+             * 在areaDiv移动显示鼠标坐标
+             *
+             */
+
+            let areaDiv = document.getElementById("areaDiv");
+            let showMsg = document.getElementById("showMsg");
+            let box1 = document.getElementById("box1");
+
+            //所有事件对象，每次触发事件的时候，浏览器都会将当前所触发的事件当做一个实参传递进来响应函数
+            //所有事件触发都会有一个事件回调函数
+            areaDiv.onmousemove = function (event) {
+
+                console.log(event);
+                /*showMsg.getElementsByTagName("p")[0].innerHTML = "x:" + event.clientX
+                    + "&nbsp;&nbsp;&nbsp;"
+                    + "y:" + event.clientY;*/
+                showMsg.innerText = "x:" + event.clientX
+                    + ",y:" + event.clientY;
+
+            }
+
+            /*areaDiv.onclick = function (event) {
+
+                alert(event)
+                console.log(event);
+                let p = document.createElement("p");
+
+            }*/
+
+            document.onmousemove = function (event) {
+
+
+                //IE兼容
+                event = event || window.event;
+
+                /**
+                 * 相对于页面坐标
+                 *  pageX
+                 *
+                 *  相对于窗口坐标
+                 *  clientX
+                 *
+                 *  chrome任务浏览器滚动条是body的  document.body.scrollTop
+                 *  狐火等其他浏览器任务浏览器滚动条是html的 document.documentElement.scrollTop
+                 *
+                 *  可以使用取消冒泡方式禁止移动的元素进入到某个元素里面
+                 *
+                 * @type {number}
+                 */
+
+                let left = event.pageX;
+                let top = event.pageY;
+
+                box1.style.position = "absolute"
+                box1.style.left = left + "px";
+                box1.style.top = top + "px";
+
+
+            }
+
+
+        }
+
+    </script>
+
+</head>
+<body style="height: 2000px;">
+
+    <div id="areaDiv"></div>
+    <div id="showMsg">
+        <p></p>
+    </div>
+
+<div id="box1"></div>
+
+</body>
+</html>

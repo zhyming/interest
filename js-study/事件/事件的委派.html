@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件的委派</title>
+
+    <script type="text/javascript">
+        window.onload = function(){
+
+            let btn = document.getElementById("btn");
+
+            let ul = document.getElementById("ul");
+            let lis = ul.getElementsByTagName("li");
+
+            /**
+             * 为已有的对象添加事件响应
+             * 如果对象为新添加的则没有
+             * 变量对象赋予事件响应效果也不太行
+             */
+           /* for (let i = 0; i < lis.length; i ++){
+                lis[i].onclick = function(){
+                    alert(lis[i].innerText)
+                }
+            }*/
+
+            btn.onclick = function (event) {
+
+                let li = document.createElement("li");
+                li.innerHTML = "<a href='javascript:;' class='link'>超链接</a>"
+                ul.appendChild(li);
+            }
+
+            /**
+             * 有方法只绑定一次，即可为所有对象添加事件响应
+             * 并且新添加的对象也有此事件响应
+             * 寻找他们的共有点
+             * 把事件绑定给父元素，则后代元素事件触发此事件就称为事件委派
+             * --事件委派是根据冒泡来完成的
+             *
+             */
+            //为ul绑定事件
+            ul.onclick = function (event) {
+                //判断期望触发事件对象 则需要使用event
+                //触发对象 target 这是一个节点对象
+                //我们可以为我们所望对象添加一个class
+
+                /*if (event.target.className == "link"){
+
+                    alert("你好");
+                    return true;
+                }*/
+
+                alert("你好");
+                return false;
+
+            }
+        }
+
+    </script>
+</head>
+<body>
+
+    <button type="button" id="btn">
+        添加链接
+    </button>
+
+    <ul id="ul">
+
+        <li><a href="javascript:;" class="link">链接一</a></li>
+        <li><a href="javascript:;" class="link">链接二</a></li>
+        <li><a href="javascript:;" class="link">链接三</a></li>
+    </ul>
+
+
+</body>
+</html>
