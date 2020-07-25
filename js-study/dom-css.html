@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dom操作样式</title>
+
+    <style type="text/css">
+
+        #box1{
+            width: 200px;
+            height: 150px;
+            background-color: red;
+            padding: 20px;
+            border: 10px solid yellow;
+
+        }
+
+
+        #box4{
+            padding: 100px;
+            background-color: aquamarine;
+        }
+
+        #box2{
+            width: 200px;
+            height: 300px;
+            background-color: yellow;
+            margin: 50px;
+            overflow: auto;
+        }
+
+        #box5{
+            width: 300px;
+            height: 600px;
+            background-color: green;
+        }
+
+
+    </style>
+
+
+    <script type="text/javascript">
+
+        window.onload = function(){
+            let box1 = document.getElementById("box1");
+            let box2 = document.getElementById("box2");
+            let box5 = document.getElementById("box5");
+            let btn01 = document.getElementById("btn01");
+            btn01.onclick = t1;
+            function t1(){
+
+                /**
+                 * 通过js修改元素样式
+                 *
+                 * 元素名.style.样式名 = 值
+                 * --值 需要的是一个字符串
+                 * 注意：如果css样式名有‘-’，这个在js中是不合法的，需要将之修改为响应驼峰命名，对于颜色这种改名
+                 * js修改的样式是内联样式，优先级比较高（！important修饰的样式不能覆盖）
+                 */
+
+                box1.style.width = "100px";
+                box1.style.backgroundColor = "blue";
+                //
+            }
+            let btn02 = document.getElementById("btn02");
+            btn02.onclick = t5;
+
+
+
+
+
+            function t2(){
+
+                /**
+                 * 读取样式
+                 *
+                 * 元素名.style.样式名
+                 * 这个只能读取内联样式，如果是单独写出来的样式文件则读取不了
+                 */
+
+                let width = box1.style.width;
+                alert(width);
+                let color = box1.style.backgroundColor;
+                alert(color);
+                //
+            }
+            function t3(){
+
+                /**
+                 *
+                 * 获取元素当前显示的样式
+                 * -- 元素.currentStyle.样式名
+                 * 它可以读取当前元素显示的样式 -- 它只能兼容IE
+                 */
+
+                let width = box1.currentStyle.width;
+                let color = box1.currentStyle.backgroundColor;
+                alert(width);
+                alert(color);
+                //
+            }
+
+            function t4(){
+
+                /**
+                 *
+                 * 在其它浏览器中，获取元素当前显示的样式
+                 * -- getComputedStyle()方法获取元素样式
+                 * --这是一个window的方法
+                 * --两个参数
+                 *   -要获取样式的元素对象
+                 *   -传递一个伪元素，一般为null
+                 * --返回一个样式对象
+                 *
+                 */
+
+                let obj = window.getComputedStyle(box1, null);
+                let width = obj.width
+                let color = obj.backgroundColor;
+                alert(width);
+                alert(color);
+                //
+            }
+
+
+
+
+            function getStyle(obj, name) {
+
+                //根据浏览器运行里有没有getComputedStyle来判断是不是走这个方法
+                /**
+                 *
+                 * 直接if(getComputedStyle) -- 这是判断一个变量 如果没有则会报错
+                 * if (window.getComputedStyle) --- 判断一个对象里有没有这个属性，没有则只会返回false
+                 *--所有以后进行判断的时候，有条件作为一个对象的属性来判断，尽量这么做
+                 * */
+                if (window.getComputedStyle){
+                    //其它浏览器
+                    return window.getComputedStyle(obj, null)[name]
+                }else{
+                    return obj.currentStyle[name];
+                }
+
+            }
+
+            /**
+             *
+             * 这两种方法获取到的样式都是不能修改的，readOnly
+             *
+             */
+
+
+            function t5(){
+
+                /**
+                 * clientWidth -- 元素可见宽度
+                 * clientHeight -- 元素可见高度
+                 * --这些属性返回的是数字，不带px
+                 * --会获取元素宽高，不包括边框
+                 * --属性为只读，不能改
+                 *
+                 */
+                //alert(box1.clientWidth);
+                //alert(box1.clientHeight);
+
+                //alert(parseInt("121qwe3"))
+
+                /**
+                 * offsetHeight
+                 * offsetWidth
+                 * 跟client~~一样，且包括边框
+                 *
+                 * */
+
+                //alert(box1.offsetHeight);
+                //alert(box1.offsetWidth);
+
+
+                /**
+                 *
+                 * offsetParent
+                 *
+                 * 定位父元素
+                 * --或获取到当前元素最近的开启了定位的元素 position:~~
+                 *   --如果祖先元素都没有开启定位，则返回body
+                 * */
+                //let of = box1.offsetParent;
+                //alert(of.id)
+
+                /**
+                 *
+                 * offsetLeft
+                 * --当前元素相对于定位父元素水平偏移量
+                 * offsetTop
+                 * --当前元素相对于定位父元素垂直偏移量
+                 * */
+
+                //alert(box1.offsetLeft);
+
+                /**
+                 * scrollHeight
+                 * scrollWidth
+                 * 获取滚动高宽
+                 */
+                //alert(box2.scrollHeight)
+
+                /**
+                 * scrollTop
+                 * scrollLeft
+                 * 获取滚动距离
+                 */
+                //alert(box2.scrollTop)
+                //alert(box2.clientHeight);
+
+                //当 box2.scrollHeight - box2.scrollTop = box2.clientHeight 表示已经滚动到底
+                alert(box2.scrollHeight - box2.scrollTop)
+
+            }
+
+
+            /**
+             * 要改属性只能通过style.属性来修改
+             */
+
+
+        }
+
+
+    </script>
+
+</head>
+<body>
+
+<button id="btn01">点击</button>
+<button id="btn02">读取</button>
+<br/><br/>
+
+<div id="box2">
+
+    <div id="box5">
+
+    </div>
+</div>
+
+<div id="box3">
+    <div id="box4" style="position: absolute;">
+
+        <div id="box1">
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

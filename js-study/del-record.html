@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加删除记录</title>
+
+    <script type="text/javascript">
+
+        window.onload = function(){
+
+            /**
+             * 删除
+             * @type {HTMLCollectionOf<HTMLElementTagNameMap[string]>}
+             */
+            let allA = document.getElementsByTagName("a");
+            for(let i = 0; i< allA.length; i ++){
+                allA[i].onclick = function () {
+
+                    if(!confirm("是否确定？")){
+                        return false;
+                    }
+
+                    /**
+                     * 这里this代表当前所点击的这个对象
+                     * 但是不能这么写  allA[i].parentNode.parentNode;
+                     * for循环会在页面加载完成后执行 响应函数会在事件触发的时候执行（这个时候for循环已经结束 此时i为3）
+                     * 所以会有问题
+                     * 所以要谨记 在使用循环给对象添加事件响应的时候，响应函数里必须使用this 总之响应函数里优先使用this来代表当前对象总没错
+                     * */
+
+                    let tr = this.parentNode.parentNode;
+                    tr.parentNode.removeChild(tr);
+
+                    let fr = tr.firstElementChild;
+                    let name = tr.getElementsByTagName("td")[0].innerHTML;
+
+                    //默认的超链接是会跳转页面的，但是设置了点击事件，给他返回一个false，则不会进行跳转
+
+                    return false;
+
+                }
+            }
+
+            /**
+             * @add item
+             */
+
+            //点击按钮后保存 1.为按钮添加响应事件函数
+            let sub = document.getElementById("addBtn");
+            sub.onclick = function () {
+                //添加之前先获取数据
+                let name = document.getElementById("name").value;
+                let email = document.getElementById("email").value;
+                let salary = document.getElementById("salary").value;
+
+                let tr =  document.createElement("tr");
+                let td1 =  document.createElement("td");
+                let td2 =  document.createElement("td");
+                let td3 =  document.createElement("td");
+                let td4 =  document.createElement("td");
+
+                let a = document.createElement("a");
+                let txt1 = document.createTextNode(name);
+                let txt2 = document.createTextNode(email);
+                let txt3 = document.createTextNode(salary);
+                let txt4 = document.createTextNode("delete");
+
+                td1.appendChild(txt1);
+                td2.appendChild(txt2);
+                td3.appendChild(txt3);
+                //a标签没有href属性 不会有点击效果
+                a.appendChild(txt4)
+                a.href = "javascript:;"
+                /**在a标签构造完成的时候给他添加一个事件响应函数
+                 *
+                 */
+                a.onclick = function () {
+
+                    if(!confirm("是否确定？")){
+                        return false;
+                    }
+                    //这里this代表当前所点击的这个对象
+                    let tr = this.parentNode.parentNode;
+                    tr.parentNode.removeChild(tr);
+
+                    let fr = tr.firstElementChild;
+                    let name = tr.getElementsByTagName("td")[0].innerHTML;
+
+                    //默认的超链接是会跳转页面的，但是设置了点击事件，给他返回一个false，则不会进行跳转
+
+                    return false;
+
+                }
+
+
+                td4.appendChild(a);
+
+                tr.appendChild(td1);
+                tr.appendChild(td2);
+                tr.appendChild(td3);
+                tr.appendChild(td4);
+
+                let table = document.getElementById("table");
+                //获取table下的tbody
+                let tbody = table.getElementsByTagName("tbody")[0];
+                tbody.appendChild(tr);
+
+
+                /**
+                 *
+                 * 以上方法步骤过于繁杂
+                 *
+                 */
+
+                //我们要添加一个tr
+                //创建一个tr
+                let ctr = document.createElement("tr");
+                //为tr添加子元素节点
+                ctr.innerHTML = "" +
+                    "<td>"+ name +"</td>" +
+                    "<td>"+ email +"</td>" +
+                    "<td>"+ salary +"</td>" +
+                    "<td><a href='javascript:;'>Delete</a>></td>";
+
+                //然后父元素在添加这个tr作为子元素即可
+
+                tbody.appendChild(ctr);
+
+                //这种思路 -- 先确定要加什么元素 建立一个空的这个元素节点，为节点添加innerHTML
+                //然后获取父节点，父节点appendChild,完成添加
+                //不能直接在父元素上直接innerHTML，这样会重新渲染这个父元素节点，导致原先父元素中已绑定的事件丢失。
+
+                //这里还有一个问题，这样直接添加innerHTML，如何里面的元素有要添加绑定事件的，需要
+                //使用新建的这个元素，进行查找 ctr.getELementBy..得到想要绑定的节点对象，然后添加事件函数绑定
+                let ca = ctr.getElementsByTagName("a")[0];
+                ca.onclick = function () {
+
+                }
+
+
+
+            }
+
+        }
+
+    </script>
+</head>
+<body>
+
+
+</body>
+</html>

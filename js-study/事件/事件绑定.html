@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件绑定</title>
+
+    <script type="text/javascript">
+
+        window.onload = function(){
+
+            var btn01 = document.getElementById("btn01");
+            var btn02 = document.getElementById("btn02");
+            /*btn01.onclick = function(){
+                alert(1);
+            }*/
+
+            //如何为对象绑定多个响应函数
+            /**
+             *
+             * 使用对象.事件 = 函数形式 -- 来绑定响应函数，
+             * 它只能为一个元素绑定一个事件，如果绑定多个最后一个会覆盖前面的
+             *
+             */
+
+            /**
+             *
+             * addEventListener()
+             * - 可以为元素对象绑定响应函数
+             * - 参数
+             *      1.事件的字符串，不带on
+             *      2.回调函数，当事件触发时，回调用该函数
+             *      3.是否在捕获阶段触发事件，true/false
+             *
+             * addEventListener()
+             * -可以为元素添加多个事件，按照绑定顺序执行 不支持IE8
+             */
+
+            btn01.addEventListener("click", function () {
+
+                alert(1);
+            }, false)
+
+            btn01.addEventListener("click", function(){
+                alert(2);
+            })
+
+            /**
+             *  addAttachEvent()
+             *  --专供支持IE
+             *  --参数
+             *      1.事件字符串，要on
+             *      2.回调函数
+             *
+             */
+
+            btn02.attachEvent("onclick", function () {
+
+                alert(1);
+            })
+
+            btn02.attachEvent("onclick", function () {
+
+                alert(2);
+            })
+
+        }
+
+        /**
+         *
+         * @param obj 绑定对象
+         * @param event 触发事件 传递的时候不带on,因为字符串加比减简单
+         * @param callbackFunc 回调函数
+         */
+        function bind(obj, event, callbackFunc) {
+
+            if(obj.addEventListener){
+                //其它浏览器
+                obj.addEventListener(event, callbackFunc, false);
+            }else {
+                //IE
+                /**
+                 *
+                 * this--由调用方式决定
+                 * --修改函数this
+                 *   -callback.call(obj)
+                 */
+                abj.attachEvent("on" + event, function () {
+
+                    //在匿名函数里调用回调函数
+                    callbackFunc();
+                    //设置callbackFunc this对象定义
+                    callbackFunc.call(obj)
+                })
+            }
+
+        }
+    </script>
+</head>
+<body>
+<button id="btn01">点我</button>
+<button id="btn02">点我</button>
+
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文档对象模型</title>
+
+    <script type="text/javascript">
+
+        /**
+         *
+         * 浏览器加载顺序
+         *
+         * --由上至下，如果js代码写到head里头，那么当时页面还没有加载完成
+         * --讲js代码写到body下，是为了确保页面先加载完成
+         * --设置onload事件，页面加载完成后触发 为window绑定onload
+         */
+        window.onload = function(){
+            let btn = document.getElementById("btn");
+            //btn.click();
+            console.log(btn);
+            btn.ondblclick= happen;
+
+
+            function happen() {
+                alert("发生什么了？")
+            }
+        }
+
+
+        window.onload = function () {
+
+            let btn01 = document.getElementById("btn01");
+            btn01.onclick = function () {
+                let bj = document.getElementById("bj");
+                alert(bj.innerHTML);
+            }
+
+            let btn02 = document.getElementById("btn02");
+            btn01.onclick = function () {
+                //返回一个类数组对象，
+                let lis = document.getElementsByTagName("li");
+                alert(lis);
+
+                for (let i in  lis){
+                    alert(lis[i].innerHTML);
+                }
+            }
+
+            let btn03 = document.getElementById("btn03");
+            btn03.onclick = function () {
+                let genders = document.getElementsByName("gender");
+                alert(genders.innerHTML);
+                /**
+                 * innerHTML用于获取元素标签内部HTML代码，如果为自结标签，则返回空
+                 *
+                 * innerText 获取元素下所有文本、没有标签
+                 */
+
+                /**
+                 * 如果要读取元素标签属性值，则直接 元素.属性名
+                 * --元素.id、元素.name、元素.value
+                 * --唯独class为js保留字，不能这样直接读
+                 * --需要这样读：元素.className
+                 */
+
+                for (let i in  genders){
+                    //alert(genders[i].innerHTML);
+                    alert(genders[i].value);
+                }
+            }
+
+        }
+
+        /**
+         *
+         * 获取元素节点子节点
+         *
+         */
+
+        let btn04 = document.getElementById("btn04");
+
+        btn04.onclick = function () {
+
+
+            let city = document.getElementById("city");
+            //获取某个元素节点下子元素
+            let lis = city.getElementsByTagName("li");
+
+            for (let i in  lis){
+                //alert(genders[i].innerHTML);
+                alert(lis[i].innerHTML);
+            }
+        }
+
+
+        let btn05 = document.getElementById("btn05");
+        btn05.onclick = function(){
+            let city = document.getElementById("city");
+            //获取节点下所有子节点 包括空白内容，文本节点<br/>
+            let childNodes = city.childNodes;
+
+            //获取节点下所有子元素 不包括空白文本
+            let children = city.children;
+
+        }
+
+        let btn06 = document.getElementById("btn06");
+        btn06.onclick = function(){
+            let phone = document.getElementById("phone");
+           //第一个子节点 包括空白文本节点
+            let firstChild = phone.firstChild;
+            //获取第一个子元素
+            let firstElementChild = phone.firstElementChild;
+
+        }
+
+        /**
+         * 父兄节点
+         */
+
+
+
+        myclick("btn07", function () {
+
+            let bj = document.getElementById("bj");
+            let parentNode =bj.parentNode;
+        })
+
+        myclick("btn08", function () {
+
+            let android = document.getElementById("android");
+            //前一个兄弟节点  也会获取空白文本
+            let previousSibling =android.previousSibling;
+            //前一个兄弟元素  也会获取空白文本
+            let previousElementSibling =android.previousElementSibling;
+        })
+
+        myclick("btn09", function () {
+
+            let username = document.getElementById("username");
+            let value =username.value;
+        })
+
+        myclick("btn10", function () {
+
+            let username = document.getElementById("username");
+            username.value = "zhong";
+        })
+
+        myclick("btn11", function () {
+
+            let bj = document.getElementById("bj");
+            bj.innerHTML;
+            let firstChild =bj.firstChild;
+            firstChild.nodeValue;
+
+
+        })
+
+
+
+
+
+
+
+        function myclick(btn, func) {
+
+            let button = document.getElementById(btn);
+
+            button.onclick = func;
+        }
+
+
+    </script>
+
+</head>
+<body>
+
+    <p>这是第一张图片</p>
+
+    <img src="img/1.jpg" style="width: 500px;height: 500px;" alt="未知图片">
+    <button id="prev">上一张</button>
+    <button id="next">下一张</button>
+    <!--<button id="btn" class="n_arr">我是一个按钮</button>-->
+    <script type="text/javascript">
+        /**
+         * dom 浏览器内嵌对象
+         *
+         * 文档节点对象浏览器已经为我们提供了，代表整个网页--document
+         */
+
+        //获取文档里面的对象
+        /*let btn = document.getElementById("btn");
+        console.log(btn);
+        console.log( btn.innerHTML);
+        btn.innerHTML = "修改后的按钮";*/
+
+
+        /**
+         * 事件 --- 对页面某个操作行为
+         *
+         */
+
+        /*let btn = document.getElementById("btn");
+        //btn.click();
+        //btn.ondblclick = happen;
+
+
+        function happen() {
+            alert("发生什么了？")
+        }*/
+
+
+        /*let btn = document.getElementById("btn");
+        console.log(btn.id);
+        console.log(btn.className);
+        console.log( btn.innerHTML);*/
+
+       /* let imgs = ["img/1.jpg", "img/34.jpg", "img/b.jpg", "img/bf.jpg"]
+
+        let tp = document.getElementsByTagName("img")[0];
+        let p = document.getElementsByTagName("p")[0];
+        let prev = document.getElementById("prev");
+        let next = document.getElementById("next");
+
+        let i = 0;
+        //要修改元素属性 则 元素.属性 = 新属性值
+        prev.onclick = function () {
+            if (i == 0)
+                i = imgs.length - 1;
+            else
+                i --;
+            tp.src = imgs[i];
+            let info = "这是第 " + (i+1) + "张图片";
+            p.innerHTML = info;
+        }
+
+        next.onclick = function () {
+            if (i == imgs.length - 1)
+                i = 0;
+            else
+                i ++;
+
+            tp.src = imgs[i];
+
+            let info = "这是第 " + (i+1) + "张图片";
+            p.innerHTML = info;
+        }*/
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+</body>
+</html>
