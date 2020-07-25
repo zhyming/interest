@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件的传播</title>
+    <style type="text/css">
+        #box1{
+            width: 300px;
+            height: 300px;
+            background-color: yellowgreen;
+        }
+        #box2{
+            width: 200px;
+            height: 200px;
+            background-color: yellow;
+        }
+        #box3{
+            width: 150px;
+            height: 150px;
+            background-color: skyblue;
+        }
+    </style>
+
+    <script type="text/javascript">
+
+        window.onload = function () {
+
+            var box1 = document.getElementById("box1");
+            var box2 = document.getElementById("box2");
+            var box3 = document.getElementById("box3");
+
+            /**
+             *
+             * 事件会跟冒泡一样 层层触发响应从里往外传
+             *
+             *
+             * W3C将事件分成了3个阶段
+             *    1.捕获阶段
+             *      -在捕获阶段时从最外层的祖先元素（docume\window），向目标元素进行事件捕获，但是默认此时事件不触发
+             *    2.目标阶段
+             *      -事件捕获到目标元素，捕获元素，开始在目标元素触发事件
+             *    3.冒泡阶段
+             *      - 事件从目标元素向它祖先元素传递，依次触发祖先元素事件
+             *
+             * 设置addEventListener,设置第三个参数为true--捕获阶段触发事件
+             * --一般不会捕获阶段时触发事件
+             *
+             * IE8及以下没有阶段的说法，统一为冒泡模式
+             * */
+            bind(box1, "click", function () {
+
+                alert("我是box1");
+            })
+            bind(box2, "click", function () {
+
+                alert("我是box2");
+            })
+            bind(box3, "click", function () {
+
+                alert("我是box3");
+            })
+
+        }
+
+        function bind(obj, event, callbackFunc) {
+
+            if(obj.addEventListener){
+                //其它浏览器
+                obj.addEventListener(event, callbackFunc, true);
+            }else {
+                //IE
+                /**
+                 *
+                 * this--由调用方式决定
+                 * --修改函数this
+                 *   -callback.call(obj)
+                 */
+                abj.attachEvent("on" + event, function () {
+
+                    //在匿名函数里调用回调函数
+                    callbackFunc();
+                    //设置callbackFunc this对象定义
+                    callbackFunc.call(obj)
+                })
+            }
+
+        }
+
+    </script>
+
+</head>
+<body>
+
+<div id="box1">
+    <div id="box2">
+        <div id="box3">
+
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

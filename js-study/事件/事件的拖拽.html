@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件的拖拽</title>
+    <style type="text/css">
+        #box1{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: fixed;
+        }
+        #box2{
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+            left: 200px;
+            top: 200px;
+            position: fixed;
+        }
+
+    </style>
+
+    <script type="text/javascript">
+
+        window.onload = function () {
+
+            var box1 = document.getElementById("box1");
+
+
+            /**
+             * 分析拖拽业务
+             *  1.鼠标按下，开始拖拽 onmousedown
+             *  2.鼠标移动，对象一同移动 onmousemove
+             *  3.鼠标松开，被拖拽对象固定到当前位置 onmouseout
+             *
+             */
+
+            box1.addEventListener("mousedown", function (event) {
+
+                //现在鼠标指针会一直在左上角 如何在哪个位置点击拖拽，位置不变
+                /**
+                 * 点击的时候距离就已经定了，所有在按下事件
+                 * div偏移 鼠标。clientX - 元素.offsetLeft
+                 *        鼠标。clientX - 元素.offsetLeft
+                 */
+
+                var ol = event.clientX - box1.offsetLeft;
+                var ot = event.clientY - box1.offsetTop;
+
+
+                document.onmousemove = function (event) {
+
+                    var pageX = event.pageX - ol;
+                    var pageY = event.pageY - ot;
+
+
+
+                    box1.style.left = pageX + "px";
+                    box1.style.top = pageY + "px";
+                }
+
+                //此刻如何也应该吧onmouseup也取消呢？
+                document.onmouseup = function () {
+
+                    document.onmousemove = null;
+                    //我自己杀了我自己~~
+                    document.onmouseup = null;
+                    alert("松开");
+                }
+
+
+
+            })
+
+        }
+    </script>
+
+</head>
+<body>
+
+<div id="box1">
+
+</div>
+
+<div id="box2">
+
+</div>
+
+</body>
+</html>
