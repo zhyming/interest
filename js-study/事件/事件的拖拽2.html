@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件的拖拽</title>
+    <style type="text/css">
+        #box1{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: fixed;
+        }
+        #box2{
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+            left: 200px;
+            top: 200px;
+            position: fixed;
+
+        }
+
+    </style>
+
+    <script type="text/javascript">
+
+        window.onload = function () {
+
+            var btn01 = document.getElementById("btn01");
+            var btn02 = document.getElementById("btn02");
+
+            btn01.onclick = function(){
+
+                alert(1);
+            }
+
+            btn02.onclick = function(){
+                alert(2);
+            }
+
+            //设置按钮对鼠标按下相关事件进行捕获
+            //仅IE支持
+            //设置下一次鼠标点击事件均赋予给btn01
+            btn01.setCapture();
+
+
+        }
+    </script>
+
+</head>
+<body>
+
+<button id="btn01">按钮1</button>
+<button id="btn02">按钮2</button>
+
+</div>
+
+</body>
+</html>
