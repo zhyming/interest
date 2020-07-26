@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>滚轮事件</title>
+
+    <style type="text/css">
+        #box1{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+
+    </style>
+
+    <script type="text/javascript">
+
+        window.onload = function(){
+
+            var box1 = document.getElementById("box1");
+
+            /**
+             *
+             * 当滚轮向上滚动时 box边长
+             * --向下滚动 box变短
+             *
+             */
+
+            //为元素绑定一个滚轮事件
+            box1.onwheel = function (event) {
+
+                event = event || window.event;
+
+                //event.wheelDelta k可以获取滚动方向
+
+                if(event.wheelDelta > 0){
+                    box1.style.height =  (box1.clientHeight - 10) +"px";
+                }else{
+                    box1.style.height =  (box1.clientHeight + 10) +"px";
+                }
+
+                //alert(event.wheelDelta);
+
+                //
+                /**
+                 * 当滚轮滚动的时候，如果页面有滚动条，滚动条会随之滚动
+                 * 这是浏览器默认行为，可以取消--return false
+                 * --在元素触发事件中 return false 则可以取消浏览器默认行为
+                 */
+                //event.defaultPrevented
+
+                //return false;
+                event.preventDefault();
+
+                /**
+                 *
+                 * 对于addEventListener添加的事件，可以用event来取消
+                 * event.preventDefault();  ---IE8不支持
+                 *
+                 */
+            }
+
+
+        }
+
+    </script>
+
+</head>
+<body style="height: 2000px">
+
+<div id="box1">
+
+</div>
+
+</body>
+</html>

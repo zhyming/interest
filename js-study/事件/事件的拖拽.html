@@ -17,6 +17,7 @@
             left: 200px;
             top: 200px;
             position: fixed;
+
         }
 
     </style>
@@ -36,8 +37,8 @@
              *
              */
 
-            box1.addEventListener("mousedown", function (event) {
-
+            //box1.addEventListener("mousedown", function (event) {
+            box1.onmousedown = function (event) {
                 //现在鼠标指针会一直在左上角 如何在哪个位置点击拖拽，位置不变
                 /**
                  * 点击的时候距离就已经定了，所有在按下事件
@@ -51,10 +52,12 @@
 
                 document.onmousemove = function (event) {
 
-                    var pageX = event.pageX - ol;
-                    var pageY = event.pageY - ot;
+                    /*var pageX = (event.pageX - ol) > 0 ? (event.pageX - ol) : 0;
+                    var pageY = (event.pageY - ot )> 0 ? (event.pageY - ot) : 0;*/
 
 
+                    var pageX = event.pageX - ol ;
+                    var pageY = event.pageY - ot ;
 
                     box1.style.left = pageX + "px";
                     box1.style.top = pageY + "px";
@@ -66,18 +69,34 @@
                     document.onmousemove = null;
                     //我自己杀了我自己~~
                     document.onmouseup = null;
-                    alert("松开");
+                    //alert("松开");
+                    if (box1.releaseCapture)
+                        box1.releaseCapture();
                 }
 
+                /**
+                 *
+                 * 当我们拖拽网页中的内容，浏览器会自动去搜索
+                 *  此时会导致拖拽异常 这是浏览器默认行为
+                 *  如果要取消这个默认行，可以return false
+                 *  --仅适用于 元素对象.事件 = 响应函数 这种方式
+                 *  --如果用addEventListener方式这样做事没有效果的
+                 *
+                 */
+                return false;
 
-
-            })
+            }
+            if (box1.setCapture)
+                box1.setCapture();
 
         }
     </script>
 
 </head>
 <body>
+
+<span>一段文字</span>
+
 
 <div id="box1">
 
