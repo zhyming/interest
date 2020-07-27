@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>history对象</title>
+
+    <script type="text/javascript">
+
+        /**
+         *
+         * history。lenght
+         * -当前访问页面的数量
+         *
+         */
+        //alert(history.length)
+        window.onload = function () {
+
+            var btn = document.getElementById("btn");
+
+            btn.onclick = function () {
+
+                //返回上一页
+                //history.back();
+                history.go(1);
+            }
+
+            /**
+             *  go()
+             *  跳转到指定页面，传入一个整数
+             *  go(1) -- 向前跳转一个页面 == forward()
+             *  go(-1) -- 向后跳转一个页面 == back()
+             *
+             */
+
+
+        }
+
+    </script>
+</head>
+<body>
+
+    <h1>TEST01</h1>
+
+    <a href="test02.html">test02</a>
+    <button id="btn">上一页</button>
+
+</body>
+</html>
