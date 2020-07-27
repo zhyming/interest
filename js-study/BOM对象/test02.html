@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TEST02</title>
+
+    <script type="text/javascript">
+
+        //alert(history.length)
+        window.onload = function () {
+            var btn = document.getElementById("btn");
+
+            btn.onclick = function () {
+
+                //返回前一页
+                //history.go(-1);
+                /**
+                 * 获取location对象
+                 *  -直接打印是当前页面地址
+                 */
+                //alert(location);
+                /**
+                 * 使用的是一个完整路径，那么会直接跳转到这个路径
+                 * 使用的是一个相对路径，那么会以当前页面地址替换为此相对路径
+                 */
+                //location = "../dom.html";
+
+                /**
+                 * assign()
+                 *  - 用来跳转到其它页面，效果跟给location赋值一样
+                 *
+                 */
+                location.assign("../dom.html");
+
+                //重新加载当前页面，相当于刷新页面
+                //location.reload()
+
+                /**
+                 * replace
+                 *  -可以使用一个页面来替换当前页面
+                 *  -不会生成历史记录
+                 */
+
+                //location.replace("../dom.html");
+            }
+        }
+
+
+    </script>
+
+</head>
+<body>
+
+<h1>TEST02</h1>
+<a href="history对象.html">history</a>
+<button id="btn">地址</button>
+<input>输入：
+</body>
+</html>

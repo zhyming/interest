@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>键盘事件</title>
+
+    <script type="text/javascript">
+
+        /**
+         * 键盘事件：
+         *  onkeydown
+         *      -键盘按下
+         *      -如果按下键盘不松口，则事件会一直触发
+         *      -当onkeydown连续触发时，第一次和第二次的时间会稍微长一点，其它会非常的快
+         *          -这是浏览器防止误操作的发生
+         *  onkeyup
+         *      -键盘松开
+         *      -它不会连续触发
+         *
+         * 键盘事件一般绑定给取的到焦点的对象
+         */
+
+        window.onload = function(){
+
+            var box1 = document.getElementById("box1");
+            box1.onkeydown = function () {
+
+                alert(1);
+
+            }
+
+            var keyCode;
+            document.onkeydown = function (event) {
+
+                event = event || window.event;
+
+                /**
+                 * 可以使用keyCode判断哪个按下被按下
+                 * --
+                 *   altKey
+                 *   ctrlKey
+                 *   shiftKey
+                 * --用这三个来判断alt ctrl shift 是否被按下 返回true/false
+                 *
+                 * */
+                //alert(event.keyCode);
+
+                /*if (event.keyCode === 89){
+                    console.log("Y被按下了");
+                }*/
+
+                //判断按键是否被同事按下
+                //判断y跟ctrl是否被同时按下
+                /*if (event.keyCode == 89 && event.altKey){
+                    alert("同时按下了Y跟alt");
+                }*/
+
+                //if (event.ke)
+
+                //console.log(event.key);
+                //alert("document 按下");
+
+                 keyCode = event.keyCode;
+
+
+
+            }
+            document.onkeyup = function(){
+
+                keyCode = 0;
+            }
+
+            setInterval(function () {
+                if(keyCode == 37){
+                    let left = box1.offsetLeft - 10;
+                    if (left < 10){
+                        left = 0;
+                    }
+                    box1.style.left = left + "px"
+
+                }else if(keyCode == 38){
+
+                    let top = box1.offsetTop - 10;
+                    if (top < 10){
+                        top = 0;
+                    }
+                    box1.style.top = top + "px"
+                }else if(keyCode == 39){
+
+                    let bodyW = document.body.clientWidth - box1.clientWidth;
+                    let left = box1.offsetLeft + 10;
+                    if (left > bodyW){
+                        left = bodyW;
+                    }
+                    box1.style.left = left + "px"
+                }else if(keyCode == 40){
+                    let bodyH = window.innerHeight - box1.clientHeight;
+
+                    let top = box1.offsetTop + 10;
+                    if (top > bodyH){
+                        top = bodyH;
+                    }
+                    box1.style.top = top + "px"
+                }
+            },30)
+
+
+            var name = document.getElementById("name");
+            name.onkeydown = function (event) {
+                event = event || window.event;
+                //alert(12);
+
+                //按下按键后，相应键值会填入相应输入框，这是浏览器默认行为，要取消可以return false；
+                /**
+                 * 这样就可以限制文本框的输入内容
+                 */
+                //限制不能输入数字
+                if (48 <= event.keyCode &&  event.keyCode <= 57){
+                    alert(event.keyCode)
+                    return false;
+                }
+                
+            }
+        }
+
+    </script>
+</head>
+<body>
+
+<div id="box1" style="width: 100px;height: 100px;background-color: red;position: absolute"></div>
+
+<label for="name">姓名:</label>
+<input id="name"/>
+
+</body>
+</html>

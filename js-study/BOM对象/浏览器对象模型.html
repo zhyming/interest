@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>浏览器对象模型</title>
+
+    <script type="text/javascript">
+
+        /**
+         * BOM
+         *  -浏览器对象模型
+         *  -BOM可以通过js操作浏览器   /   DOM通过js操作html（文档）
+         *  -BOM对象
+         *      Window
+         *          -代表整个浏览器窗口，同时window也是网页中的全局对象
+         *      Navigator--航海家
+         *          -代表当前浏览器信息，通过该对象可以识别不同浏览器
+         *      Location
+         *          --代表当前浏览器的地址栏信息，通过location可以获取地址栏信息，跳转页面
+         *      History
+         *          -代表浏览器历史记录，可以通过该对象来操作浏览器历史记录
+         *              -由于隐私原因，不能获取历史记录具体内容，只能操作浏览器向前/向后
+         *              而且只能档次访问有效
+         *      Screen
+         *          -可以获取屏幕相关信息，用户显示器相关信息
+         *
+         *
+         * 这些BOM对象在浏览器中都是作为window对象的属性保存的
+         *  可以通过window对象使用，也可以直接使用
+         *
+         */
+
+        /**
+         *
+         * navigator
+         *  -识别当前浏览器信息
+         *  -由于历史原因，navigator对象中的大部分属性都已经不能 帮我们识别浏览器了
+         *  -一般我们只用userAgent来判断浏览器信息   userAgent--等价于浏览器
+         *      userAgent包含描述浏览器信息的内容，不同浏览器会有不同内容，是一个字符串
+         */
+
+        //在IE11中已经把微软、IE相关内容去除了，所以现在已经不能这样来去区分浏览器了
+        var reg = /chrome\//i
+        if (reg.test(navigator.userAgent)){
+           // alert("这是谷歌浏览器");
+        }
+
+        /**
+         *
+         * 所以我们判断浏览器中是否有这个对象来使用
+         * 比如：ActiveObject  -- IE独有
+         */
+
+        //alert(ActiveXObject);
+        //他是一个window对象所以 我们这样来判断--window.ActiveObject
+
+        //作为对象属性来判断，避免报错
+        //alert(window.ActiveXObject)
+        /**
+         *
+         *  给对象来两个！！转换为boolean
+         */
+
+        //这个在IE11中是返回false的
+        alert(!!window.ActiveXObject)
+
+        /**
+         * 使用in 来判断属性是否存在
+         * 属性名要用字符串格式
+         *
+         */
+
+        alert("ActiveXObject" in window)
+
+
+
+    </script>
+
+</head>
+<body>
+
+
+</body>
+</html>
