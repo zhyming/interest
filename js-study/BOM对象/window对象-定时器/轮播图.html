@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>轮播图</title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        img{
+            width: 500px;
+            height: 300px;
+        }
+
+        #outer{
+            width: 520px;
+            height: 300px;
+            /*设置居中*/
+            margin: 50px auto;
+            padding: 10px 0;
+            position: relative;
+            background-color: yellowgreen;
+            overflow: hidden;
+
+        }
+
+        #imgList{
+            list-style: none;
+            /*设置ul宽度*/
+            position: absolute;
+
+            /*left: -520px;*/
+        }
+
+        /*设置图片浮动，让它横向展示*/
+        #imgList li{
+
+            float: left;
+            /*设置左右外边距*/
+            margin: 0 10px;
+        }
+
+        #navDiv{
+            position: absolute;
+            bottom: 15px;
+
+
+        }
+
+        #navDiv a{
+            float: left;
+            width: 15px;
+            height: 15px;
+            background-color: red;
+            margin: 0 5px;
+            /*设置透明度*/
+            opacity: 0.5;
+        }
+
+        #navDiv a:hover{
+            background-color: black;
+        }
+    </style>
+    <script type="text/javascript" src="../../js/tool.js"></script>
+
+    <script type="text/javascript">
+
+        window.onload = function () {
+            //获取imgList宽度
+            var imgList = document.getElementById("imgList");
+            var imgs = imgList.getElementsByTagName("img");
+            var leng = imgs.length * 520;
+            imgList.style.width = leng +"px";
+            var allA = document.getElementsByTagName("a");
+
+            var offset = 0;
+
+            var index = 0;
+            allA[index].style.backgroundColor = "black"
+            setInterval(function () {
+                offset += -520;
+
+                index ++ ;
+                if (Math.abs(offset) == leng){
+                    offset = 0
+                    index = 0;
+                }
+                setA();
+
+                imgList.style.left = offset + "px";
+
+            }, 1000)
+
+
+            for (var i = 0; i< allA.length;i++){
+                //为每一个对象添加一个标记
+                allA[i].num = i;
+
+                allA[i].onclick = function () {
+
+                    var speed = 20;
+                    if (this.num > index){
+                        speed = -speed;
+                    }
+
+                    index = this.num;
+                    //imgList.style.left = -520 * index + "px";
+
+
+                    move(imgList, "left", -520 * index, speed)
+                    setA();
+                    //alert(this.num);
+                }
+            }
+
+            function setA() {
+                for (var i = 0; i< allA.length;i++){
+                    //去除内联样式，就会去读取样式表的样式（使用默认样式）
+                    allA[i].style.backgroundColor = "";
+                }
+                allA[index].style.backgroundColor = "black";
+
+            }
+
+            /**
+             * 设置导航按钮居中
+             */
+            var navDiv = document.getElementById("navDiv");
+            var outer = document.getElementById("outer");
+            navDiv.style.left = (outer.clientWidth - navDiv.clientWidth) / 2 + "px";
+
+
+
+        }
+
+    </script>
+
+</head>
+<body>
+
+<div id="outer">
+    <ul id="imgList">
+        <li><img src="../../img/1.jpg"></li>
+        <li><img src="../../img/34.jpg"></li>
+        <li><img src="../../img/b.jpg"></li>
+        <li><img src="../../img/bf.jpg"></li>
+
+    </ul>
+
+    <div id="navDiv">
+        <a href="javascript:;"></a>
+        <a href="javascript:;"></a>
+        <a href="javascript:;"></a>
+        <a href="javascript:;"></a>
+    </div>
+
+</div>
+
+</body>
+</html>
