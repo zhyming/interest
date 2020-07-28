@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>定时器的使用</title>
+
+    <style type="text/css">
+        /*清除默认样式*/
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        #box1{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+        }
+
+    </style>
+
+    <script type="text/javascript">
+
+        window.onload = function () {
+
+            var box1 = document.getElementById("box1");
+            var btn01 = document.getElementById("btn01");
+            var btn02 = document.getElementById("btn02");
+
+            /*btn01.onclick = function (event) {
+
+                box1.style.left = box1.offsetLeft +10 + "px";
+
+            }*/
+
+
+            /**
+             *
+             * 为对象设置一个timer属性，保存自己定时器标识
+             * btn01.timer
+             *
+             * 传递参数为变量 对象要取这个参数所指属性值应用中括号obj[arr]
+             * @type {null}
+             */
+            var timer1 = null;
+            var timer2 = null;
+            btn01.onclick = function (event) {
+
+                /*clearInterval(timer2);
+                timer2 = null;
+
+                if (timer1){
+                    clearInterval(timer1);
+                    timer1 = null;
+                }else{
+                    timer1 = setInterval(function () {
+                        var val = box1.offsetLeft +10;
+                        if (val >= 800){
+                            val = 800;
+                        }
+
+                        box1.style.left = val + "px";
+                        if (val == 800){
+                            clearInterval(timer1);
+                            timer1 = null;
+                        }
+
+                    }, 50);
+
+                }*/
+                move(box1, "height", 800, 50,function () {
+
+                     move(box1, "width", 800, 50,function () {
+
+                         move(box1, "top", 0, -50,function () {
+
+                             move(box1, "width", 100, -50,function () {
+
+                                 move(box1, "height", 100, -50);
+                             });
+                        });
+                     });
+                });
+
+            }
+            btn02.onclick = function (event) {
+
+                clearInterval(timer1);
+                timer1 = null;
+
+                if (timer2){
+                    clearInterval(timer2);
+                    timer2 = null;
+                }else{
+                    timer2 = setInterval(function () {
+                        var val = box1.offsetLeft - 10;
+                        if (val <= 0){
+                            val = 0;
+                        }
+
+                        box1.style.left = val + "px";
+                        if (val == 0){
+                            clearInterval(timer2);
+                            timer2 = null;
+                        }
+
+                    }, 50);
+
+                }
+
+            }
+
+            /**
+             *
+             * @param obj 操作对象
+             * @param attr 操作对象的属性
+             * @param target 改变上限
+             * @param speed 速度
+             * @param callback 回调函数
+             */
+
+            function move(obj, attr, target, speed, callback) {
+
+                if (obj.timer){
+                    clearInterval(obj.timer);
+                    obj.timer = null;
+                }else{
+                    obj.timer = setInterval(function () {
+                        var val = parseInt(getStyle(obj, attr));
+                        val += speed;
+                        if ((speed > 0 && val > target) || (speed < 0 && val < target)){
+                            val = target;
+                        }
+
+                        box1.style[attr] = val + "px";
+                        if (val == target){
+
+                            clearInterval(obj.timer);
+                            obj.timer = null;
+                            callback && callback();
+                        }
+
+                    }, 50);
+
+                }
+
+            }
+
+            function getStyle(obj, name) {
+
+                /**
+                 *
+                 * 根据浏览器运行里有没有getComputedStyle来判断是不是走这个方法
+                 * 直接if(getComputedStyle) -- 这是判断一个变量 如果没有则会报错
+                 * if (window.getComputedStyle) --- 判断一个对象里有没有这个属性，没有则只会返回false
+                 * -所有以后进行判断的时候，有条件作为一个对象的属性来判断，尽量这么做
+                 *
+                 *
+                 */
+
+                if (window.getComputedStyle){
+                    //其它浏览器
+                    return window.getComputedStyle(obj, null)[name]
+                }else{
+                    return obj.currentStyle[name];
+                }
+
+            }
+
+        }
+
+    </script>
+
+</head>
+<body>
+
+<button id="btn01">box1右移</button>
+<button id="btn02">box1左移</button>
+<br/><br/>
+<div id="box1"></div>
+
+<div style="width: 0px;height: 900px;border: 1px solid; position: absolute; left: 800px;top: 0px;"/>
+
+</body>
+</html>
