@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>操作类</title>
+
+    <style type="text/css">
+
+        .b1{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+        .b2{
+            width: 200px;
+            /*height: 100px;*/
+            background-color: yellow;
+        }
+
+    </style>
+
+    <script type="text/javascript">
+        window.onload = function () {
+            var btn = document.getElementById("btn");
+            var box1 = document.getElementById("box1");
+            var box2 = document.getElementById("box2");
+
+            btn.onclick = function () {
+                /**
+                 * 这样每次修改样式会使页面重新渲染
+                 *
+                 * @type {string}
+                 */
+                //box1.style.width = box1.clientWidth + 100 + "px";
+
+
+                /**
+                 *
+                 * 直接修改class来修改样式
+                 * 页面只会渲染一次
+                 * @type {string}
+                 */
+                //box1.className = "b2";
+
+                /**
+                 * 样式叠加
+                 */
+
+                addClass(box1, "b2");
+                //box1.className += " b2";
+            }
+            btn02.onclick = function () {
+                /**
+                 * 这样每次修改样式会使页面重新渲染
+                 *
+                 * @type {string}
+                 */
+                //box1.style.width = box1.clientWidth + 100 + "px";
+
+
+                /**
+                 *
+                 * 直接修改class来修改样式
+                 * 页面只会渲染一次
+                 * @type {string}
+                 */
+                //box1.className = "b2";
+
+                /**
+                 * 样式叠加
+                 */
+
+                //removeClass(box1, "b2");
+                //box1.className += " b2";
+                toggleClass(box1, "b2");
+            }
+
+            function addClass(obj, cn) {
+                if (!(hasClass(obj, cn))){
+                    obj.className += " " + cn;
+                }
+
+            }
+
+            function hasClass(obj, cn) {
+                /**
+                 * 判断obj有没有cn
+                 *
+                 * 使用正则表达式，并使用单词边界 \b
+                 */
+                //这是固定的情况
+                //var reg = /\bb2\b/
+
+                //如果要使用变量则需要使用构造函数来创建
+                var reg = new RegExp("\\b"+cn+"\\b");
+                return reg.test(obj.className);
+
+            }
+
+            /**
+             * 删除class属性
+             */
+
+            function removeClass(obj, cn) {
+                var reg = new RegExp("\\b"+cn+"\\b");
+                obj.className = obj.className.replace(reg, "")
+
+            }
+
+            /**
+             *
+             * toggleClass切换一个类
+             * 如果元素有该类，则删除
+             * 如果元素没有该类，则增加
+             */
+
+            function toggleClass(obj, cn) {
+
+                if(hasClass(obj, cn)){
+                    removeClass(obj, cn);
+                }else{
+                    addClass(obj, cn);
+                }
+
+
+            }
+
+
+        }
+
+    </script>
+</head>
+<body>
+
+<button id="btn">点我</button>
+<button id="btn02">删除</button>
+
+<div id="box1" class="b1"></div>
+</body>
+</html>

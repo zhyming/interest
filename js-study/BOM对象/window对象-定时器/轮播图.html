@@ -82,16 +82,20 @@
             setInterval(function () {
                 offset += -520;
 
+                var speed = -20;
                 index ++ ;
                 if (Math.abs(offset) == leng){
                     offset = 0
                     index = 0;
+                    imgList.style.left = 0;
                 }
+                move(imgList, "left", -520 * index, speed)
                 setA();
 
-                imgList.style.left = offset + "px";
 
-            }, 1000)
+                //imgList.style.left = offset + "px";
+
+            }, 2000)
 
 
             for (var i = 0; i< allA.length;i++){
