@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>json基本</title>
+
+    <script type="text/javascript">
+
+        /**
+         * js 中提供了JSON来进行对象转换为json
+         */
+
+        var obj = '{"name": "张三", "age": 12}';
+
+        /**
+         * json-->对象
+         *      JSON.parse()
+         *      -参数json字符串
+         *
+         */
+
+        var person = JSON.parse(obj);
+        //alert(person.age);
+        //alert(person.name);
+
+        var arr = '[23, "张三", 45, "yyy", "李四", "王五"]';
+
+        var o2 = JSON.parse(arr);
+        //console.log(o2);
+
+        var p2 = {
+            name: "王五",
+            age: 44,
+            gender: "男"
+        }
+
+        /**
+         *
+         * js对象转换为json
+         * --JSON.stringify()
+         *   -参数js对象
+         *
+         */
+
+        var obj2 = JSON.stringify(p2);
+        //console.log(typeof obj2);
+        //console.log(obj2);
+
+        /**
+         * eval()
+         *  -可以执行一段字符串形式的JS代码，并返回结果
+         *  -如果执行的字符串中含有{}，会把它当成一个代码块
+         *  -如果不想把它当做代码块解析，则前后加个小括号
+         *
+         * ---这玩意性能较差，还是别用了，而且有脚本注入风险，别用了
+         */
+
+        var str2 = "alert(2)";
+        //可以执行
+        eval(str2);
+
+        var obj3 = eval("(" + obj +")");
+
+    </script>
+
+</head>
+
+
+<body>
+
+
+</body>
+</html>
