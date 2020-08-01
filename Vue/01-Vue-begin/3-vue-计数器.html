@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <h1>当前计数{{num}}</h1>
+    <!--<button v-on:click="num ++">+</button>
+    <button v-on:click="num &#45;&#45;">-</button>-->
+
+    <button v-on:click="increment">+</button>
+    <button v-on:click="sub">-</button>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+
+
+    //proxy
+
+    const app = new Vue({
+        el: "#app",
+        data: {
+            num: 0
+        },
+        methods: {
+            increment: function () {
+
+                this.num ++;
+                console.log("increment执行");
+            },
+            sub: function () {
+
+                this.num --;
+                console.log("sub执行");
+            }
+        },
+        /**
+         *
+         * js内部会回调这些函数,
+         * 不止这些，每个阶段都有相应的回调，可以进行跟踪
+         */
+        beforeCreate: function(){
+
+        },
+        created: function () {
+
+            console.log("create执行");
+        },
+        mounted: function () {
+            console.log("mounted执行");
+
+        }
+
+
+    })
+
+    /**
+     *
+     * 命令式：
+     *   拿到元素，给元素添加listener事件
+     */
+
+    /**
+     *
+     *  语法糖，语法的简写
+     *  v-on:click == @click
+     *
+     */
+
+    /**
+     *
+     * MVVM  Model ViewModel View
+     *
+     */
+
+    /**
+     *
+     * Vue 生命周期 诞生-->消亡
+     */
+
+    const arr = new Array(12, 43, 44, "张三", 55);
+
+    console.log(arr);
+
+
+</script>
+</body>
+</html>

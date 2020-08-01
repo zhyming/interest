@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello Vue</title>
+
+    <script type="text/javascript" src="../js/vue.js"></script>
+
+</head>
+<body>
+
+<div id="app">
+    {{message}}
+    {{name}}
+</div>
+<div>{{name}}</div>
+
+<script>
+
+    /**
+     * 响应式页面，数据改变，页面也跟着改变
+     *
+     */
+
+    const app = new Vue({
+        //用于要挂载的管理的元素
+        el: "#app",
+        //定义数据
+        data: {
+            message: "你好Vue",
+            name: "张三"
+        }
+    });
+
+    
+</script>
+
+</body>
+</html>
