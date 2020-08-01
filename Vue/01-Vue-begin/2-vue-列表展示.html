@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+
+    <ul>
+        <!--只需要告诉数据在哪，接下来处理交给Vue-->
+        <li v-for="item in movies">{{item}}</li>
+    </ul>
+
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = new Vue({
+
+        el: "#app",
+        data: {
+            message: '你好',
+            movies: ['星际', '魔兽', '暗黑']
+        }
+
+    })
+
+</script>
+</body>
+</html>
