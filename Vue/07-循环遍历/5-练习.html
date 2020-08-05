@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .active{
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <ul>
+      <li v-for="(item, index) in persons" @click="setCurrentIndex(index)" :class="{active: currentIndex === index}">{{item}}</li>
+    </ul>
+  </div>
+
+  <script src="../js/vue.js"></script>
+  <script>
+
+    const app = new Vue({
+      el: "#app",
+      data: {
+        persons: ['张三', '李四', '王五', '孙六'],
+        currentIndex: 0
+      },
+      methods: {
+        setCurrentIndex(index){
+          this.currentIndex = index;
+        }
+      }
+    })
+
+  </script>
+
+</body>
+</html>

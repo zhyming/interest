@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+  <style>
+    [v-cloak]{
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="app">
+    {{message}}
+    <h2>{{message}}</h2>
+    <h2>{{message}},你好呀</h2>
+  </div>
+
+  <script src="../js/vue.js"></script>
+  <script>
+
+    /**
+     * 在vue解析之前有v-cloak
+     * 在vue解析之后无v-cloak
+     * 对无法解析的对象则隐藏
+     */
+    const app = new Vue({
+      el: "#app",
+      data: {
+        message: "Hello Vue"
+      }
+    })
+
+  </script>
+</body>
+</html>

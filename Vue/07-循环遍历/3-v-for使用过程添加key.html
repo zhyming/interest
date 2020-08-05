@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div id="app">
+    <ul>
+      <!--使用key作为唯一绑定，一定要绑定给显示的值；key可以保证重新插入值得时候原先标签对应的值不变，单独为新添加的属性建立一个新标签，提高性能-->
+      <li v-for="l in letters" :key="l">{{l}}</li>
+    </ul>
+  </div>
+
+  <script src="../js/vue.js"></script>
+  <script>
+
+    /**
+     * VUE是响应式的，Vue内部会监听我们数据的变化，重新渲染虚拟dom，然后更新显示
+     */
+    const app = new Vue({
+      el: "#app",
+      data: {
+        /**
+         * 在数组里面插入值
+         *  1.letters.push('u')--在数组后加
+         *  2.letters.splice(2, 0, 'u')--在下标2后删除0个元素，并加入u
+         */
+        letters: ['A', 'B', 'C', 'D', 'E', 'F']
+      }
+    })
+
+  </script>
+
+</body>
+</html>

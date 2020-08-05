@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div id="app">
+    <h2>{{message}}</h2>
+    <!--一种比较低级的方式进行连接-->
+    <h2>{{firstName}} {{lastName}}</h2>
+    <!--这也是一种与模式不相符的方法，这里要的是属性，而现在却调用了函数 -->
+    <!--这里一定要用mustache语法，不然dom就会直接打印，不会进行解析-->
+    <!--只要涉及变量等显示的不是表面字符串的都需要使用mustache语法来进行计算-->
+    <h2>{{getFullName()}}</h2>
+    <!--<h2>{{getFullName()}}</h2>
+    <h2>{{getFullName()}}</h2>
+    <h2>{{getFullName()}}</h2>-->
+    <!--使用计算属性，可以在vue内进行计算，直接得到返回值，不需要加括号 -->
+    <h2>{{fullName}}</h2>
+    <h2>{{fullName}}</h2>
+    <h2>{{fullName}}</h2>
+    <h2>{{fullName}}</h2>
+
+  </div>
+
+  <script src="../js/vue.js"></script>
+  <script>
+
+    const app = new Vue({
+      el: "#app",
+      data: {
+        message: "Hello Vue",
+        firstName: "李",
+        lastName: "洛克"
+      },
+      //vue 的计算属性--表明这是一个值，所以可以在里面定义一个变量，值为一个计算函数
+      /**
+       *
+       * 对比computed和methods里面的调用计算，computed里面只会调用一次，它是有缓纯的，当里面用到的变量如firstName有所改变时它才会重新调用
+       * 而methods里的函数每次都会调用，所有computed进行计算时性能会更好
+       *
+       */
+      computed: {
+        fullName: function () {
+          console.log("fullName");
+          return this.firstName + this.lastName;
+        }
+      },
+      methods: {
+        getFullName: function () {
+          return this.firstName + this.lastName;
+
+        }
+      }
+    })
+
+  </script>
+
+</body>
+</html>

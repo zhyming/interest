@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+  <script>
+
+    //创建对象
+    //const obj = new Object();
+
+    //使用字面量创建对象--字面量->即数据之间赋值给对象
+    //const obj = {}
+
+
+    //1.属性的增强写法
+    const name = "张三";
+    const age = 124;
+
+    //这是ES6之前写法
+    /*const obj = {
+      name: name,
+      age: age
+    }*/
+
+    //ES6 可以这么写，增强属性
+    const obj = {
+      name,
+      age
+    }
+
+    /**
+     * 函数的增强写法
+     */
+
+    //ES6之前
+    const obj1 = {
+      run: function () {
+
+      }
+    }
+
+    //ES6函数增强
+    const obj2 = {
+      run(){
+
+      },
+      eat(){
+
+      }
+    }
+
+
+  </script>
+</body>
+</html>

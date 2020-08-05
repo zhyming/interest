@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div id="app">
+
+    <h2 :style="{fontSize: '50px'}">{{message}}</h2>
+    <h2 :style="{fontSize: t_size+'px', color: t_color}">{{message}},你好呀</h2>
+  </div>
+
+  <script src="../js/vue.js"></script>
+  <script>
+
+    /**
+     * :style --> {key(属性名)： value(属性值)}
+     * vue解析的时候回吧value当做一个变量去解析
+     * 加上单引号 则会按照字符串去解析
+     *
+     *
+     */
+
+    const app = new Vue({
+      el: "#app",
+      data: {
+        message: "Hello Vue",
+        t_size: 100,
+        t_color: "green"
+      }
+    })
+
+  </script>
+</body>
+</html>

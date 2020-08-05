@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+  <button>点我</button>
+  <button>点我</button>
+  <button>点我</button>
+  <button>点我</button>
+  <button>点我</button>
+</head>
+<body>
+  <script>
+    //在ES5之前，if跟for没有作用域的概念，都是借用function作用域来解决问题
+    //在ES6加入了let，实现了内部变量的作用域
+    //1.变量作用域: 变量的可用范围
+    {
+      var name = "张三";
+      //console.log(name);
+    }
+    //console.log(name);
+    /**
+     * 对于var定义的变量 来说 在{} 内外均可用访问
+     *
+     */
+    //没有块级作用域引起的问题 -- 在内部创建的变量会在外面被人修改
+    if(true){
+      var name = "李四";
+    }
+
+    var btns = document.getElementsByTagName("button");
+
+    for (var i = 0; i< btns.length; i++){
+
+      btns[i].addEventListener("click", function () {
+        //console.log("第" + i + "按钮");
+      });
+
+      /**
+       * 使用闭包函数 函数是有作用域的
+       * 这样的实质就是循环几次就有几个函数
+       */
+      (function (index) {
+        btns[index].addEventListener("click", function () {
+          //console.log("第" + index + "按钮");
+        });
+
+      })(i);
+    }
+
+    //使用ES6来处理上面问题 使用let可以完美解决问题
+
+    const btns2 = document.getElementsByTagName("button");
+
+    for(let i = 0; i < btns2.length; i ++ ){
+      btns[i].addEventListener("click", function () {
+        console.log("第" + i + "按钮");
+      });
+    }
+
+
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div id="app">
+    <!--跟mustache语法一致，解析除变量的值-->
+    <div v-text="message"></div>
+    <div>{{message}},你好呀</div>
+    <!--不同点，这样会覆盖元素整个子元素内容，所有原先的内容会有所丢失
+        在处理纯文本对象的时候，与v-html一致他们的关系就如同 innerHTML--innerText
+    -->
+
+    <div v-text="message">,你好呀</div>
+  </div>
+
+
+  <script src="../js/vue.js"></script>
+  <script>
+
+    const app = new Vue({
+      el: "#app",
+      data: {
+        message: "Hello Vue"
+      }
+    })
+
+  </script>
+</body>
+</html>
