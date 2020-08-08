@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div id="app">
+    <!--checkbox单选框，一般用在是否同意的意见-->
+    <!--对应的是boolean值，选中返回true,否则返回false-->
+    <!--<label for="license">
+      <input type="checkbox" id="license" v-model="isAgree">同意协议
+    </label>
+
+    <h2>{{isAgree}}</h2>
+    <button :disabled="!isAgree">下一步</button>-->
+
+    <!--checkbox多选框-->
+    <!--对应的是一个数组选中会在数组里面添加选中的value，取消选中，则会在数组里面去除-->
+    <input type="checkbox" value="篮球" v-model="balls">篮球
+    <input type="checkbox" value="足球" v-model="balls">足球
+    <input type="checkbox" value="羽毛球" v-model="balls">羽毛球
+    <input type="checkbox" value="乒乓球" v-model="balls">乒乓球
+
+    <h2>{{balls}}</h2>
+  </div>
+
+  <script src="../js/vue.js"></script>
+  <script>
+
+    const app = new Vue({
+      el: "#app",
+      data: {
+        message: "Hello Vue",
+        isAgree: false,
+        //多选绑定使用数组
+        balls: []
+      }
+    })
+
+  </script>
+</body>
+</html>

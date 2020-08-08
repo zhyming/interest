@@ -16,7 +16,7 @@
     const app = new Vue({
       el: "#app",
       data: {
-        books: [
+        animal: [
           {id: 110, type: "猫", name: "小花", weight: 20},
           {id: 120, type: "狗", name: "旺财", weight: 40},
           {id: 130, type: "牛", name: "敦敦", weight: 200},
@@ -26,7 +26,7 @@
       computed: {
         weight: function () {
           let sum = 0;
-          this.books.forEach(function (w) {
+          this.animal.forEach(function (w) {
             sum += w.weight;
           })
           return sum;

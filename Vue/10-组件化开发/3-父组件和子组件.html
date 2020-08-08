@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div id="app">
+    <comp1></comp1>
+    <comp2></comp2>
+  </div>
+
+  <script src="../js/vue.js"></script>
+  <script>
+
+    //1.创建第一个组件对象
+    const comp1 = Vue.extend({
+      template: `
+      <div>
+        <h2>我是标题1</h2>
+        <p>我是内容哈哈哈哈哈</p>
+      </div>
+      `
+    })
+    //2.创建第二个组件对象
+    const comp2 = Vue.extend({
+      template: `
+       <div>
+        <h2>我是标题2</h2>
+        <p>我是内容呵呵呵呵呵呵</p>
+        <comp1></comp1>
+      </div>
+      `,
+      //在组件对象里面注册了一个组件(那么comp1则为子组件)
+      //如果comp1只在这里注册了，那么它只能在它的父范围内使用
+      //父组件注册的时候，会去找<comp1>有没有注册，没有则去全局找
+      components: {
+        comp1
+      }
+    })
+
+    //app 也可以看成为根组件
+    const app = new Vue({
+      el: "#app",
+      data: {
+        message: "Hello Vue"
+      },
+      components: {
+        comp2
+      }
+    })
+
+  </script>
+</body>
+</html>

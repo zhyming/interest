@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div id="app">
+    <!--这里有3个组件实例，它们并没有共用同一个data，-->
+    <cpn></cpn>
+    <cpn></cpn>
+    <cpn></cpn>
+  </div>
+
+  <template id="cpn">
+    <div>
+      <h2>当前计数{{count}}</h2>
+      <button @click="increment">+</button>
+      <button @click="decrement">-</button>
+    </div>
+  </template>
+
+  <script src="../js/vue.js"></script>
+  <script>
+
+    const objc = {
+      count: 0
+    }
+    //1.注册组件
+    const cpn = Vue.component('cpn', {
+      template: '#cpn',
+      /**
+       * 组件里面data必须使用函数，每次返回一个新的对象；如若不是这样，每次都返回同一个对象，那么这个组件重复使用的时候，它们就会相互影响
+       * 如果想要相互影响，那么就把返回的对象写出来，然后每次都返回这个对象，那么就会相互影响
+       * @returns {{count: number}}
+       */
+      data(){
+        //return objc
+        return {
+          count: 0
+        }
+      },
+      methods: {
+        increment(){
+          this.count ++;
+        },
+        decrement(){
+          this.count --;
+        }
+      }
+    })
+
+    const app = new Vue({
+      el: "#app",
+      data: {
+        message: "Hello Vue"
+      }
+    })
+
+  </script>
+
+  <script>
+    function abc() {
+      return {
+        name: 'me',
+        age: 12
+      }
+    }
+
+    /**
+     * 这里创建了三个对象obj1、obj2、obj3它们是不一样的，就跟java创建3个对象类型，每次函数都新建一个对象返回
+     * @type {{name: string, age: number}}
+     */
+    let obj1 = abc();
+    let obj2 = abc();
+    let obj3 = abc();
+
+
+
+    const obj = {
+      name: 'me',
+      age: 12
+    }
+
+    /**
+     *
+     * 这样写是返回同一个对象
+     */
+    function func() {
+
+      return obj;
+    }
+
+  </script>
+</body>
+</html>

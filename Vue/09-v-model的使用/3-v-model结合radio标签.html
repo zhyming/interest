@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div id="app">
+    <!--radio结合，要所用radio互斥只能选一个，则需要把他们的name设置成一样，这样就只能提交一个-->
+    <!--在都使用v-model进行绑定同一个变量（sex）时，这时标签就已经时互斥的了，可以不要name-->
+    <label for="male">男:
+      <!--<input type="radio" id="male" name="sex" value="1" v-model="sex">-->
+      <input type="radio" id="male" value="1" v-model="sex">
+    </label>
+    <label for="female">女:
+<!--      <input type="radio" id="female" name="sex" value="0" v-model="sex">-->
+      <input type="radio" id="female" value="0" v-model="sex">
+    </label>
+
+    <h2>{{sex}}</h2>
+
+  </div>
+
+  <script src="../js/vue.js"></script>
+  <script>
+
+    const app = new Vue({
+      el: "#app",
+      data: {
+        message: "Hello Vue",
+        //这里写上值，因为这个变量使用v-model双向绑定的，可以给他设置默认选项
+        sex: 1
+      }
+    })
+
+  </script>
+</body>
+</html>

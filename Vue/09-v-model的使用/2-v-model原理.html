@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+  <div id="app">
+    <!--<input type="text" v-model="message">-->
+
+    <!--v-model就是这样绑定+事件的结合-->
+    <input type="text" :value="message" @input="valChange">
+
+    <!--在元素标签里面使用事件的对象，则可以用$event-->
+    <input type="text" :value="message" @input="message = $event.target.value">
+
+    <input type="text" v-model="message">
+
+    <textarea id="" cols="30" rows="10" v-model="message"></textarea>
+
+    <h2>{{message}}</h2>
+  </div>
+
+  <script src="../js/vue.js"></script>
+  <script>
+
+    const app = new Vue({
+      el: "#app",
+      data: {
+        message: "Hello Vue"
+      },
+      methods: {
+        valChange(event){
+          this.message = event.target.value;
+        }
+      }
+    })
+
+    /**
+     * input --- @input事件，监听用户输入
+     *
+     * 一旦有事件，事件函数必定自动传递一个event参数，可以event.target来得到此事件对象
+     */
+
+  </script>
+</body>
+</html>

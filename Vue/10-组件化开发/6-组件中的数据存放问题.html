@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <cpn></cpn>
+  <cpn-2></cpn-2>
+</div>
+
+<!--1.使用script分离，*类型必须使用 -- text/x-template 并且为这个script添加一个id，然后注册的时候用这个id去注册-->
+<script type="text/x-template" id="cpn">
+  <div>
+    <h2>{{title}}</h2>
+    <p>我是内容扭扭捏捏呢</p>
+  </div>
+</script>
+
+<!--2.使用template标签,也要加一个id作为标识-->
+<template id="cpn2">
+  <div>
+    <h2>我是标题2</h2>
+    <p>我是内容扭扭捏捏呢</p>
+  </div>
+</template>
+
+<script src="../js/vue.js"></script>
+<script>
+
+  /**
+   * 组件内部是不能访问vue的数据的，
+   * 不能直接方法data里面的东西--设想如果可以访问，数据都放在vue的data里面，这得多臃肿啊
+   *
+   * 组件要形成动态改变数据，需要在自己内部加data
+   * 组件里也可以有methods，它就是跟vue实例一样，所以说vue实例时root组件
+   */
+  Vue.component('cpn', {
+    template: '#cpn',
+    //组件里面的data必须设置成函数形式，返回对象值
+    /*data: {
+      title: '我是标题'
+    }*/
+    data(){
+      return {
+        title: '我是一个标题'
+      }
+    }
+  })
+
+  Vue.component('cpn-2', {
+    template: '#cpn2'
+  })
+
+  const app = new Vue({
+    el: "#app",
+    data: {
+      message: "Hello Vue"
+    }
+  })
+
+</script>
+</body>
+</html>
