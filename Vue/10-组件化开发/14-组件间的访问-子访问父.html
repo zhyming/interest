@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+
+</head>
+<body>
+<div id="app">
+  <cpn></cpn>
+</div>
+
+<template id="cpn">
+  <div>
+    <h2>我是子组件</h2>
+    <button @click="btnClick">点我</button>
+    <br>
+    <br>
+    <cpn2></cpn2>
+  </div>
+</template>
+
+<template id="cpn2">
+  <div>
+    <h2>我是子组件的子组件</h2>
+    <button @click="btnClick2">点我</button>
+  </div>
+</template>
+
+<script src="../js/vue.js"></script>
+<script>
+
+  const app = new Vue({
+    el: "#app",
+    data: {
+      message: "Hello Vue"
+    },
+    components: {
+      cpn: {
+        template: "#cpn",
+        data(){
+          return {
+            name: "我是子组件的name"
+          }
+        },
+        methods: {
+          btnClick() {
+            //1.访问父组件--=$parent
+            console.log(this.$parent);
+          }
+        },
+        components: {
+          cpn2: {
+            template: "#cpn2",
+            data(){
+              return {
+                name: "我是孙组件的name"
+              }
+            },
+            methods: {
+              //1.访问父组件--=$parent--这玩意用的极少，有点难以理解--组件不是各种复用的嘛？那么肯定会有多个组件用这个子组件，那么this.$parent
+              //返回一个父对象，感觉有点问题。
+              btnClick2() {
+                //console.log(this.$parent.name);
+
+                /**
+                 *
+                 * 2.访问根组件--$root--返回vue实例对象
+                 */
+                console.log(this.$root)
+                console.log(this.$root.message)
+
+              }
+            }
+          }
+        }
+      }
+    }
+  })
+
+</script>
+</body>
+</html>

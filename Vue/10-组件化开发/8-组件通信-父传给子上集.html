@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div id="app">
+    <!--使用v-bind修饰，一般要使用vue解析，需要用到vue语法，则要vue添加修饰，表面此属性的值需要经过vue解析计算得到-->
+    <cpn :movies="movies" :message="message"></cpn>
+  </div>
+
+  <template id="cpn">
+    <div>
+      <h2>我是标题</h2>
+      <p>我是内容扭扭捏捏呢</p>
+      <ul>
+        <li v-for="item in movies">{{item}}</li>
+      </ul>
+    </div>
+  </template>
+
+  <script src="../js/vue.js"></script>
+  <script>
+
+    /**
+     * 父传子--使用props
+     * @type {{template: string}}
+     */
+    const cpn = {
+      template: "#cpn",
+      //props: ['movies', 'message']
+      props: {
+        movies: {
+          type: Array,
+          //默认的值为对象或者数组的时候最好使用函数来返回默认值
+          default(){
+            return []
+          }
+        },
+        message: {
+          //这个类型可以是自定义类型，如定义一个function Person（）--可以写一个Person来规定传入的类型
+          type: String,
+          default: '',
+          //表示这个属性是必须要传的
+          required: true
+        }
+      }
+
+    }
+
+    const app = new Vue({
+      el: "#app",
+      data: {
+        message: "Hello Vue",
+        movies: ["手", "脚", "眼", "鼻", "耳"]
+      },
+      components: {
+        cpn
+      }
+    })
+
+  </script>
+</body>
+</html>

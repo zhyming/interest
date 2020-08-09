@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <cpn>
+    <!--我在组件里面添加了三个插槽，如果我只需修改一处，如果直接添加自定义内容如下，那么它这么知道要改哪个插槽呢，很明显这样是不行的，它会把所有插槽都
+        替换成新定义的内容，那么这个时候我们就必须给插槽起一个名字-->
+    <!--对起有名字的插槽，必须在新添加的内容里面绑定插槽名字才能替换，如果不绑定，那么只会替换没有名字的插槽-->
+    <span>我要修改中间部分</span>
+
+    <span slot="middle">我修改了middle</span>
+
+    <!--有一点需要注意，插槽slot是把自定义的所有内容包括标签去替换改名称插槽下的所有内容
+        要替换一大堆东西都是可以的，需要用过根标签包起来就行了-->
+    <div slot="right">
+      <p>请填写下面的信息</p>
+      <form action="#">
+        姓名：<input type="text">
+        年龄：<input type="text">
+        <button type="submit">提交</button>
+      </form>
+    </div>
+    <button slot="left">点我</button>
+  </cpn>
+</div>
+
+<template id="cpn">
+  <div>
+    <!--根据需要额外定义的地方有好几处，我们可以多创建几个插槽-->
+    <slot name="left">
+      <span>左边</span>
+    </slot>
+    <slot name="middle">
+      <span>中间</span>
+    </slot>
+    <slot name="right">
+      <span>右边</span>
+    </slot>
+    <slot>测试</slot>
+  </div>
+</template>
+
+<script src="../js/vue.js"></script>
+<script>
+
+  const app = new Vue({
+    el: "#app",
+    data: {
+      message: "Hello Vue"
+    },
+    components: {
+      cpn: {
+        template: "#cpn"
+      }
+    }
+  })
+
+</script>
+</body>
+</html>

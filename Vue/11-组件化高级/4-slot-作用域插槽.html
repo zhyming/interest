@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div id="app">
+    <cpn></cpn>
+    <!--作用域插槽：父组件定义展示方式，子组件提供数据
+        ==当前属于父作用域，无法拿到子组件数据
+        ==那么我们怎么拿到子组件数据呢，又不像自定义事件需要触发的情况？
+        ==在子组件成插槽自定义绑定属性:data--这个属性是随意起的，可以:ddd
+        ==然后在父组件使用template标签包含自定义额外内容，通过属性slot-scope=‘slot’
+        ==拿到插槽对象，就可以拿到在子组件通过插槽绑定的数据-->
+    <!--slot-scope--插槽范围 -- 把插槽数据绑定给一个对象-->
+
+
+    <cpn>
+      <template slot-scope="pLanguage">
+        <!--在对象后面拼接‘-’，会在最后面有多余一个，那么可以使用数组的一个方法，join（）-->
+        <!--<span v-for="item in pLanguage.ddd">{{item}}-</span>-->
+        <span>{{pLanguage.ddd.join("-")}}-</span>
+
+      </template>
+    </cpn>
+    <cpn>
+      <template slot-scope="slot">
+        <!--<span v-for="item in slot.ddd">{{item}}*</span>-->
+        <span>{{slot.ddd.join("*")}}-</span>
+      </template>
+    </cpn>
+  </div>
+  <template id="cpn">
+    <div>
+      <!--自定义属性，将本组件内数据绑定给插槽里的一个数据对象，然后父组件使用此组件的时候，可以在插槽中通过绑定的名字找到这个对象
+        感觉就有点像创建一个对象把它放到slot容器里面，然后父组件去slot容器里面可以拿到这个对象--有点spring容器的味道哦
+       -->
+      <slot :ddd="pLanguage">
+        <ul>
+          <li v-for="item in pLanguage">{{item}}</li>
+        </ul>
+      </slot>
+    </div>
+  </template>
+
+  <script src="../js/vue.js"></script>
+  <script>
+
+    const app = new Vue({
+      el: "#app",
+      data: {
+        message: "Hello Vue"
+      },
+      components: {
+        cpn: {
+          template: "#cpn",
+          data(){
+            return {
+              pLanguage: ["java", "c++", "c#", "js", "py"]
+            }
+          }
+        }
+      }
+    })
+
+  </script>
+</body>
+</html>

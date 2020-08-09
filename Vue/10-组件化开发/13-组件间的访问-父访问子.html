@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+
+</head>
+<body>
+  <div id="app">
+    <!--单标签目前来说不行的-->
+    <!--这样用了3个子组件，$children可以得到一个数组里有3个子组件对象-->
+    <cpn></cpn>
+    <cpn></cpn>
+    <!--我们在引用组件时，给此组件声明一个引人，那么我们在父组件就可以用$refs来维护它-->
+    <cpn ref="c"></cpn>
+    <button @click="btnCLick">点我</button>
+  </div>
+
+  <template id="cpn">
+    <div>
+      我是子组件
+    </div>
+  </template>
+
+  <script src="../js/vue.js"></script>
+  <script>
+
+    const app = new Vue({
+      el: "#app",
+      data: {
+        message: "Hello Vue"
+      },
+      components: {
+        cpn: {
+          template: "#cpn",
+          data(){
+            return {
+              name: "张三"
+            }
+          },
+          methods: {
+            /**
+             * 我在子组件定义了一个方法，然后如果父组件要用直接可以$children.方法名就可以调用
+             */
+           showMessage() {
+              console.log("我是子组件的一条消息");
+           }
+          }
+        }
+      },
+      methods: {
+        btnCLick() {
+          if(this.$children){
+            for (let c of this.$children){
+              /**
+               * 得到引用的子组件对象数组，对子组件对象直接进行数据获取，属性、方法直接暴露在外层
+               */
+              //console.log(c.name);
+              //c.showMessage()
+
+            }
+
+            /**
+             * 我们得到一哥组件对象数组，如果我们要拿的组件对象在第三个，
+             * 这时我们就会这么拿,使用数组下标
+             */
+            //console.log(this.$children[2]);
+
+            /**
+             * 2.使用$refs
+             * --怎么使用已声明引用的组件，直接this.$refs.引用名--得到子组件对象
+             * --我们基本都是使用$refs来操作子组件，因为$children直接得到的是所用子组件，而我们可以自己对子组件定义ref属性，来声明要操作哪些
+             *    我们只要我们要的
+             * 在使用$refs前必须记得对要操作的子组件添加ref属性，才能拿到它，它默认是个空对象
+             */
+            console.log(this.$refs.c.name);
+
+          }
+        }
+      }
+    })
+
+  </script>
+</body>
+</html>

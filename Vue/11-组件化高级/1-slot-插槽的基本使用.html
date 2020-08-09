@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div id="app">
+    <cpn>
+      <!--在组件里面添加不同部分，就可以添加到插槽位置-->
+      <button>点我</button>
+    </cpn>
+    <cpn>
+      <sapn>这里是span提示</sapn>
+    </cpn>
+    <cpn></cpn>
+    <cpn></cpn>
+    <cpn></cpn>
+    <cpn></cpn>
+    <cpn>
+      <!--这里添加的自定义内容全部都会添加到插槽位置-->
+      <li>这里是li</li>
+      <button>点我</button>
+      <p>哈哈哈哈哈</p>
+    </cpn>
+    <cpn>
+      请输入：<input type="text">
+    </cpn>
+    <cpn>
+      <button>点我</button>
+    </cpn>
+  </div>
+
+  <template id="cpn">
+    <div>
+      <h2>组件标题</h2>
+      <p>哈哈哈哈哈哈哈</p>
+      <!--给组件预留插槽，添加东西-->
+      <slot>
+        <!--这里添加插槽的默认值，在引用组件的时候，没有添加自定义内容，则会使用这默认值-->
+        <button>点我</button>
+      </slot>
+      <!--<button>点我</button>-->
+    </div>
+  </template>
+
+  <script src="../js/vue.js"></script>
+  <script>
+
+    const app = new Vue({
+      el: "#app",
+      data: {
+        message: "Hello Vue"
+      },
+      components: {
+        cpn: {
+          template: "#cpn"
+        }
+      }
+    })
+
+  </script>
+</body>
+</html>

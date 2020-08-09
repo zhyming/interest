@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div id="app">
+    <cpn :person="person" :num2="num2" :obj="obj"></cpn>
+    <br>
+    <span>{{person}}</span>
+    <br>
+    <span>我是父里面的数字{{num2}}</span>
+    <br>
+    <span>{{obj}}</span>
+  </div>
+
+  <template id="cpn">
+    <div>
+      <span>{{person}}</span>
+      <br>
+      <label for="name">姓名：
+        <input type="text" v-model="person.name" id="name">
+      </label>
+      <label for="age">年龄：
+        <input type="text" v-model="person.age" id="age">
+      </label>
+
+      <label for="height">身高：
+        <input type="text" v-model="person.height" id="height">
+      </label>
+
+      <br>
+      <label for="num2">我是子里面的值：
+        <!--子组件对父组件传过来的基本类型数据是不能进行双向绑定的，要改必须使用$emit来直接调用父方法，让父自己来改-->
+        <input type="text" v-model="num2" id="num2">
+      </label>
+
+
+      <br>
+      <label for="ObjName">对象名字：
+        <input type="text" id="ObjName" v-model="obj.name">
+      </label>
+      <label for="ObjAge">对象年龄：
+        <input type="text" id="ObjAge" v-model="obj.age">
+      </label>
+
+
+
+    </div>
+
+  </template>
+
+  <script src="../js/vue.js"></script>
+  <script>
+
+    const cpn = {
+      template: "#cpn",
+      props: {
+        /**
+         * 父传给子，最好在子定义一下相关接收类型跟默认值
+         */
+        person: {
+          type: Person,
+          default(){
+            return null;
+          }
+        },
+        num2: {
+          type: Number,
+          default(){
+            return 0;
+          }
+        },
+        obj: {
+          type: Object,
+          default(){
+            return null
+          }
+        }
+      }
+    }
+
+    const app = new Vue({
+      el: "#app",
+      data: {
+        person: new Person("张三", 12, 188),
+        num2: 12,
+        obj: {
+          name: "王五",
+          age: 123
+        }
+      },
+      components: {
+        cpn
+      }
+    })
+
+
+
+    /**
+     * 函数对象构造器，函数名字首字母为大写，new时就已经创建了响应空函数对象，
+     * 初始化值需要使用this（代表这个空对象），给它赋值--this.属性=传入的值---必须这么写，不用return
+     * @param name
+     * @param age
+     * @param height
+     * @constructor
+     */
+
+    function Person(name, age, height){
+      this.name = name;
+      this.age = age;
+      this.height = height;
+    }
+
+    /**
+     * 总结一下子组件改变父元素传来数据的问题：
+     * 1.可以直接使用this.$emit('绑定事件'，‘参数’)--调用自定义事件绑定类更改数据
+     * 2.定义一个函数对象，包含各种数据，把函数对象传给子，子可以改变对象里面的数据同步给父
+     * 总归为定义为引用对象，包含各种数据，把对象传给子，子可以改变对象里面的数据同步给父
+     * 3.同理对比这个2点就跟const对象一样，创建的基本类型const是不能修改的，但是如果是引用类型的，是可以修改里面的属性数据的
+     * --也就是说它这里应该是定义为常量了传给子--就跟java嵌套内部类里面传的值必须为常量应该是这么个原理
+     */
+
+  </script>
+</body>
+</html>

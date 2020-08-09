@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Title</title>
+</head>
+<body>
+  <div id="app">
+    <!--编译的时候把标签cpn看成是普通标签，当在标签里面有用到变量的的时候，都是根据当前页面来获取值得，而且不会去看子组件
+        获取变量值都是根据当前页面-->
+    <cpn v-show="isShow"></cpn>
+  </div>
+
+  <template id="cpn">
+    <div>
+      <h2>我是标题</h2>
+      <p>我是内容</p>
+    </div>
+  </template>
+
+  <script src="../js/vue.js"></script>
+  <script>
+
+    const app = new Vue({
+      el: "#app",
+      data: {
+        message: "Hello Vue",
+        isShow: true
+      },
+      components: {
+        cpn: {
+          template: "#cpn",
+          data(){
+            return {
+              isShow: false
+            }
+          }
+        }
+      }
+    })
+
+  </script>
+</body>
+</html>
