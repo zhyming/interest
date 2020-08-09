@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div id="app">
+    <!--存在的问题-切换前后input里面的内容不清空
+    原因：Vue 使用虚拟Dom进行页面渲染的时候，尽可能复用元素，提高性能；
+    以下这些有互斥情况的的元素，进行替换修改元素属性，相当于看到形成新的元素，实际还是以前的，并不会重新创建
+    解决方法：添加key属性，Vue会进行key值对比，如果不一样则不会进行复用-->
+    <span v-if="isByUserName">
+      <label for="userName">用户名称:</label>
+      <input type="text" name="userName" placeholder="用户名称" id="userName" key="userName">
+    </span>
+    <span v-else>
+      <label for="email">邮箱地址:</label>
+      <input type="text" name="email" placeholder="邮箱地址" id="email" key="email">
+    </span>
+    <button @click="changeLogin">切换登录类型</button>
+
+  </div>
+
+
+  <script src="../js/vue.js"></script>
+  <script>
+
+    const app = new Vue({
+      el: "#app",
+      data: {
+        message: "Hello Vue",
+        isByUserName: true
+      },
+      methods: {
+        changeLogin(){
+
+          if (this.isByUserName){
+            this.isByUserName = false;
+          }else{
+            this.isByUserName = true;
+          }
+
+        }
+
+      }
+    })
+
+  </script>
+</body>
+</html>

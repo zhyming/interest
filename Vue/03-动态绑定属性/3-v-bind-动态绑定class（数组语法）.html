@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+  <div id="app">
+    <!--数组内容是按照字符串来处理的-->
+    <h2 class="title" :class="['active', 'line']">{{message}}</h2>
+    <!--如果不加引号，则按照变量来处理-->
+    <h2 class="title" :class="[active, line]">{{message}}</h2>
+    <!--也可以传入函数来返回数组-->
+    <h2 class="title" :class="getClassed()">{{message}}</h2>
+    <h2>{{message}},你好呀</h2>
+  </div>
+
+  <script src="../js/vue.js"></script>
+  <script>
+
+    const app = new Vue({
+      el: "#app",
+      data: {
+        message: "Hello Vue",
+        active: "qwe",
+        line: "ttt",
+        ticket: 'yyy'
+      },
+      methods: {
+        getClassed: function () {
+          return [this.active, this.line, this.ticket];
+
+        }
+      }
+    })
+
+  </script>
+</body>
+</html>

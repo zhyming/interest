@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div id="app">
+    <!--1.lazy-->
+    <!--添加了懒加载，失去焦点或者回车时才进行值得更新-->
+    <input type="text" v-model.lazy="message">
+    <h2>{{message}}</h2>
+
+
+    <!--2.number-->
+    <!--v-model默认绑定的是字符串，需要用number限定返回类型为number-->
+    <input type="number" v-model.number="numb">
+    <h2>{{typeof numb}}</h2>
+
+    <!--3.trim-->
+    <!--去掉返回的前后空格-->
+    <input type="text" v-model.trim="name">
+    <h2>名字--{{name}}</h2>
+  </div>
+
+  <script src="../js/vue.js"></script>
+  <script>
+
+    const app = new Vue({
+      el: "#app",
+      data: {
+        message: "Hello Vue",
+        numb: 12,
+        name: ''
+      }
+    })
+
+  </script>
+
+</body>
+</html>

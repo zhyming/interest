@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div id="app">
+    <com-p></com-p>
+    <com-p></com-p>
+    <com-p></com-p>
+    <com-p></com-p>
+  </div>
+
+  <script src="../js/vue.js"></script>
+  <script>
+
+    //ES6新定义字符串 `` 1旁边的符号
+    /*`aabc
+    3453`  --- 可以直接这么写，不用像双引号一样用+号*/
+
+
+    /**
+     * 1.创建组件构造器对象
+     * 2.注册组件
+     * 3.使用组件
+     *
+     */
+    //1.创建组件对象
+    // extend需要一个参数，即要封装的html模板
+    const comp = Vue.extend({
+      template: `<div id="app">
+         <h2>我是标题</h2>
+          <p>我是内容男男女女女</p>
+          <p>我也是少时诵诗书所所</p>
+        </div>`
+    });
+    //2.注册组件
+    //component需要两个参数，1.封装后要使用的标签名  2.进行封装的组件对象
+    Vue.component('com-p', comp);
+
+
+    const app = new Vue({
+      el: "#app",
+      data: {
+        message: "Hello Vue"
+      }
+    })
+
+  </script>
+</body>
+</html>

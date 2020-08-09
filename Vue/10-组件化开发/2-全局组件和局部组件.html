@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div id="app">
+    <com-ps-use></com-ps-use>
+  </div>
+
+  <div id="app2">
+  </div>
+
+  <script src="../js/vue.js"></script>
+  <script>
+    //1.创建组件对象
+    const comPsUse = Vue.extend({
+      template: `<div id="app">
+         <h2>我是标题</h2>
+          <p>我是内容男男女女女</p>
+          <p>我也是少时诵诗书所所</p>
+        </div>`
+    })
+    //2.注册组件--这样注册的组件为全局组件，可以在多个Vue实例使用
+    //Vue.component('com-p', comp);
+
+    const app = new Vue({
+      el: "#app",
+      data: {
+        message: "Hello Vue"
+      },
+      components: {
+        //1.comPs为注册号的标签名,这里为驼峰格式，但是标签格式为<com-ps>,标签都为小写所以，按照驼峰转换为横杆
+        //comPs: comp
+
+        //2.也可以直接写组件对象，的到的标签即为对象名--comp--><comp>
+        //comp
+        //一样的,如果对象名为驼峰格式，也会以横杆来转换，形成标签--comPs--><com-ps>
+        //comPsUse-->  <com-ps-use>  切记，标签均为小写
+        comPsUse
+      }
+    })
+
+    const app2 = new Vue({
+      el: '#app2',
+      date: {
+        message: 'Hello'
+      }
+    })
+
+  </script>
+</body>
+</html>

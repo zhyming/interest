@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+  <div id="app">
+
+    <button @click="btn1Click">按钮1</button>
+    <button @click="btn2Click()">按钮2</button>
+    <!--如果此时调用一个方法，这个方法需要一个参数，但是我们连括号都没给，这个时候Vue会默认将浏览器产生的event事件对象作为参数传入到方法中-->
+    <button @click="btn3Click">按钮3</button>
+
+    <!--如果传递的参数需要event参数有需要其它参数-->
+    <!--在调用方法时，如何手动获取浏览器参数的event对象：$event -->
+    <button @click="btn4Click(123, $event)">按钮4</button>
+  </div>
+
+  <script src="../js/vue.js"></script>
+  <script>
+
+    const app = new Vue({
+      el: "#app",
+      data: {
+        message: "Hello Vue"
+      },
+      methods: {
+        /**
+         * 调用这两个方法，没有参数用不用括号都是可以的
+         */
+        btn1Click(){
+
+          alert("按钮1");
+        },
+        btn2Click(){
+
+          alert("按钮2");
+        },
+        btn3Click(abc){
+          console.log(abc);
+
+        },
+        btn4Click(abc, event){
+          console.log("-------", abc, event);
+
+        }
+      }
+    })
+
+    //如果函数有用到参数，但是我们没给它传入，则它会报错，如下，就会提升name - undefined
+    function abc(name) {
+
+      console.log(name);
+    }
+
+    //abc();
+
+  </script>
+</body>
+</html>

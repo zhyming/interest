@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div id="app">
+    <!--checkbox单选框，一般用在是否同意的意见-->
+    <!--对应的是boolean值，选中返回true,否则返回false-->
+    <!--<label for="license">
+      <input type="checkbox" id="license" v-model="isAgree">同意协议
+    </label>
+
+    <h2>{{isAgree}}</h2>
+    <button :disabled="!isAgree">下一步</button>-->
+
+    <!--checkbox多选框-->
+    <!--对应的是一个数组选中会在数组里面添加选中的value，取消选中，则会在数组里面去除-->
+    <!--<input type="checkbox" value="篮球" v-model="balls">篮球
+    <input type="checkbox" value="足球" v-model="balls">足球
+    <input type="checkbox" value="羽毛球" v-model="balls">羽毛球
+    <input type="checkbox" value="乒乓球" v-model="balls">乒乓球
+-->
+
+    <!--label-->
+    <!--进行动态绑定，动态、动态、动态----即在vue用v-bind
+    记住要的，绑定标签属性，属性值是动态的就可以这么做，它向vue说明这个值需要经过vue解析得到，即为动态的-->
+
+    <label v-for="item in allBalls" :for="item">
+      <input type="checkbox" :value="item" :id="item" v-model="balls">{{item}}
+    </label>
+
+    <h2>{{balls}}</h2>
+  </div>
+
+  <script src="../js/vue.js"></script>
+  <script>
+
+    const app = new Vue({
+      el: "#app",
+      data: {
+        message: "Hello Vue",
+        isAgree: false,
+        //多选绑定使用数组
+        balls: [],
+        allBalls: ["篮球", "足球", "羽毛球", "乒乓球", "排球", "铅球", "水球"]
+      }
+    })
+
+  </script>
+</body>
+</html>

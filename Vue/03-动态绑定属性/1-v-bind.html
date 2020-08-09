@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>动态绑定</title>
+</head>
+<body>
+
+  <div id="app">
+    <!--mustache语法只能在元素内容使用，不能在元素属性上使用-->
+    <!--<img src="{{imgUrl}}" alt="图片">-->
+
+
+    <!--使用v-bind来绑定,指定Vue，去帮你解析src的值-->
+    <!--<img v-bind:src="imgUrl" alt="图片">-->
+    <!--冒号语法糖-->
+    <img :src="imgUrl" alt="图片">
+    <a :href="url">百度一下</a>
+  </div>
+
+  <script src="../js/vue.js"></script>
+  <script>
+
+    /**
+     * v-bind 有个语法糖---
+     *  用冒号 :替换 v-bind:
+     *
+     */
+
+    const app = new Vue({
+      el: "#app",
+      data: {
+        message: "Hello Vue",
+        imgUrl: "../img/1.jpg",
+        url: "http://www.baidu.com"
+      }
+    })
+
+  </script>
+</body>
+</html>

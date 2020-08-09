@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+  <div id="app">
+    <h2>{{count}}</h2>
+    <!--在进行事件监听的时候，调用的方法没有参数可以不要括号-->
+    <button v-on:click="increment">加</button>
+    <button v-on:click="decrement()">减</button>
+  </div>
+
+  <script src="../js/vue.js"></script>
+  <script>
+
+    /**
+     * v-on 语法糖 @ --   v-on:click->@click
+     *
+     */
+    const app = new Vue({
+      el: "#app",
+      data: {
+        count: 0
+      },
+      methods: {
+
+        increment(){
+          this.count ++;
+        },
+        decrement(){
+          this.count --;
+        }
+      }
+    })
+
+
+  </script>
+</body>
+</html>

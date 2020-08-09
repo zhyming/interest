@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+  <style>
+    .active{
+      color: red;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div id="app">
+    <h2>{{message}}</h2>
+    <ul>
+      <li v-for="(item, index) in movies" v-on:click="changeColor(index)" v-bind:class="{active: isActive}">{{item}}</li>
+    </ul>
+  </div>
+
+  <script src="../js/vue.js"></script>
+  <script>
+
+    /**
+     * v-for 在哪个元素，则该元素就会变量，如：放在ul则会有5个ul里各有一个li，如放在li，则会一个ul里有一个li
+     *
+     */
+
+    const app = new Vue({
+      el: "#app",
+      data: {
+        message: "Hello Vue",
+        movies: ['显示器', '音响', '键盘', '鼠标', '主机'],
+        isActive: false
+      },
+      methods: {
+        changeColor: function (index) {
+
+          this.isActive = true;
+        }
+      }
+    })
+
+  </script>
+</body>
+</html>

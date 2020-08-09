@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+  <div id="app">
+    <h2>{{fullName}}</h2>
+  </div>
+
+  <script src="../js/vue.js"></script>
+  <script>
+
+    const app = new Vue({
+      el: "#app",
+      data: {
+        firstName: "李",
+        lastName: "洛克"
+      },
+      computed: {
+        /*fullName: function () {
+          return this.firstName + this.lastName;
+
+        }*/
+
+        /**
+         *
+         * 计算属性函数计算本质
+         * -属性值里内置有get和set
+         * -一般我们计算的到属性，就只用get方法就行了，set方法可以去掉
+         * -然后这个属性里面只有一个get方法，那么就可以转化为 上面那种方式写法
+         * --fullName: function(){} -- 其实就是在调用get方法，所有这个属性是内置调了get方法，不用带括号
+         * @returns {*}
+         */
+        fullName: {
+          set: function () {
+
+          },
+          get: function(){
+            return this.firstName + this.lastName;
+          }
+        }
+
+      }
+    })
+
+  </script>
+</body>
+</html>

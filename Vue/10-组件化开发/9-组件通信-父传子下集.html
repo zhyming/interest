@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div id="app">
+    <!--v-bind是不支持驼峰的，如果定义的对象是驼峰，你在标签里头必须转换为-格式分隔-->
+    <cpn :c-Info="info"></cpn>
+  </div>
+
+  <template id="cpn">
+    <div>
+      <div>{{cInfo.name}}</div>
+      <div>{{cInfo.age}}</div>
+      <div>{{cInfo.height}}</div>
+    </div>
+  </template>
+
+  <script src="../js/vue.js"></script>
+  <script>
+    const cpn = {
+      template: "#cpn",
+      props: {
+        cInfo: {
+          type: Object,
+          default(){
+            return {}
+          }
+        }
+      }
+    }
+
+    const app = new Vue({
+      el: "#app",
+      data: {
+        info: {
+          name: "张三",
+          age: 123,
+          height: 188
+        }
+      },
+      components: {
+        cpn
+      }
+    })
+
+  </script>
+</body>
+</html>

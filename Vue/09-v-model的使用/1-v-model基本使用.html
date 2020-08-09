@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div id="app">
+    <input type="text" v-model="message">
+  </div>
+
+  <script src="../js/vue.js"></script>
+  <script>
+
+    /**
+     * v-model--双向绑定--vue里的属性值与html元素之相互影响；而mustache只能单向影响元素
+     * --双向绑定标签的value
+     */
+
+    const app = new Vue({
+      el: "#app",
+      data: {
+        message: "Hello Vue"
+      }
+    })
+
+  </script>
+
+</body>
+</html>

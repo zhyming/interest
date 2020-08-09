@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+  <div id="app">
+    <!--最基本方式，如同遍历数组一般,这样只能获取到它的值-->
+    <ul>
+      <li v-for="i in info">{{i}}</li>
+    </ul>
+    <!--获取key-value,遍历出来的参数一般是值在第一个，比较重要的在第一个，然后key/索引在第二个-->
+    <ul>
+      <li v-for="(v, k) in info">{{v}}-{{k}}</li>
+    </ul>
+
+    <!--还可以获取第三个参数，index，这些都是按照重要性来排序的，-->
+    <ul>
+      <li v-for="(v, k, index) in info">{{v}}-{{k}}-{{index}}</li>
+    </ul>
+
+  </div>
+
+  <script src="../js/vue.js"></script>
+  <script>
+
+    const app = new Vue({
+      el: "#app",
+      data: {
+        info: {
+          name: '张三',
+          age: 16,
+          height: 145
+        }
+      }
+    })
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+  <div id="app">
+    <h2>总重量{{weight}}</h2>
+  </div>
+
+  <script src="../js/vue.js"></script>
+  <script>
+
+    const app = new Vue({
+      el: "#app",
+      data: {
+        animal: [
+          {id: 110, type: "猫", name: "小花", weight: 20},
+          {id: 120, type: "狗", name: "旺财", weight: 40},
+          {id: 130, type: "牛", name: "敦敦", weight: 200},
+          {id: 140, type: "羊", name: "玲玲", weight: 120},
+        ]
+      },
+      computed: {
+        weight: function () {
+          let sum = 0;
+          this.animal.forEach(function (w) {
+            sum += w.weight;
+          })
+          return sum;
+        }
+      }
+    })
+
+  </script>
+</body>
+</html>

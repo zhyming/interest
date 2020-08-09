@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <!--v-bind是不支持驼峰的，如果定义的对象是驼峰，你在标签里头必须转换为-格式分隔
+  值没有规定不能驼峰，但是外面的属性名一定要用横杆代替驼峰-->
+  <cpn :c-Info="info" @get-message="myMessage" @increment="increment" @decrement="decrement"></cpn>
+  <h2>{{message}}</h2>
+  <h2>{{message2}}</h2>
+  <h2>{{count}}</h2>
+</div>
+
+<template id="cpn">
+  <div>
+    <button v-for="item in movies" @click="handMessage(item)">{{item.name}}</button>
+    <button @click="increment">+</button>
+    <button @click="decrement">-</button>
+  </div>
+</template>
+
+<script src="../js/vue.js"></script>
+<script>
+  const cpn = {
+    template: "#cpn",
+    props: {
+      count: {
+        type: Number,
+        default(){
+          return 0;
+        }
+      }
+    },
+    data(){
+      return {
+        movies: [
+          {id: 1, name: "手"},
+          {id: 2, name: "脚"},
+          {id: 3, name: "眼"},
+          {id: 4, name: "鼻"},
+          {id: 5, name: "耳"}]
+      }
+    },
+    methods: {
+      handMessage(val){
+        this.$emit("get-message", val, "第二份大礼包")
+      },
+      /**
+       * 这样直接在子组件更改父组件通过props传递过来的数据是不行的，
+       */
+      /*increment(){
+        this.count ++;
+      },
+      decrement(){
+        this.count --;
+      }*/
+      /**
+       * 要改父组件的数据必须得用$emit
+       */
+      increment(){
+        this.$emit('increment')
+      },
+      decrement(){
+        this.$emit('decrement')
+      }
+
+    }
+  }
+
+  const app = new Vue({
+    el: "#app",
+    data: {
+      info: {
+        name: "张三",
+        age: 123,
+        height: 188
+      },
+      message: '',
+      message2: '',
+      count: 0
+    },
+    components: {
+      cpn
+    },
+    methods: {
+      myMessage(val, val2, val3){
+        this.message = val;
+        this.message2 = val2;
+        this.count = val3;
+      },
+      increment(){
+        this.count ++;
+      },
+      decrement(){
+        this.count --;
+      }
+    }
+  })
+
+</script>
+</body>
+</html>

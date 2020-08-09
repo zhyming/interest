@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+  <div id="app">
+    <ul>
+      <!--使用key作为唯一绑定，一定要绑定给显示的值；key可以保证重新插入值得时候原先标签对应的值不变，单独为新添加的属性建立一个新标签，提高性能-->
+      <li v-for="l in letters">{{l}}</li>
+    </ul>
+    <button @click="btnCLick">按钮</button>
+  </div>
+
+  <script src="../js/vue.js"></script>
+  <script>
+
+    /**
+     * VUE是响应式的，Vue内部会监听我们数据的变化，重新渲染虚拟dom，然后更新显示
+     */
+    const app = new Vue({
+        el: "#app",
+        data: {
+          /**
+           * 在数组里面插入值
+           *  1.letters.push('u')--在数组后加
+           *  2.letters.splice(2, 0, 'u')--在下标2后删除0个元素，并加入u
+           */
+          letters: ['A', 'B', 'C', 'D', 'E', 'F']
+        },
+        methods: {
+          btnCLick(){
+            //push方法
+            //this.letters.push("aaa");
+            //可以同时添加多个
+            //this.letters.push("zz", 'yy', 'mm');
+
+            //通过索引值更改数组元素
+            //这个不行
+            //this.letters[0] = 'aaaa';
+
+            //删除数组最后一个元素--是响应式的
+            //this.letters.pop();
+
+            //删除数组第一个元素--是响应式的
+            //this.letters.shift();
+
+            //在数组前添加元素--响应式的
+            //this.letters.unshift("zz");
+            //可以同时添加多个
+            //this.letters.unshift("zz", 'yy', 'mm');
+
+            //splice--删除/插入/替换元素--响应式的
+            //第一个参数均表示从第几个元素开始
+            //删除元素：第二个参数表面删除几个元素，如果不写则从第一个参数起，删除后面所有元素
+            //替换元素：则需要传递第三个以上参数，个数应与第二个参数值一直--即先删除相应个数元素后在添加指定元素
+            //插入元素：则需要第二个参数固定为0，表面一个都不删，后面参数为要添加元素
+
+            //this.letters.splice(2);
+            //替换元素
+            //this.letters.splice(2, 3, 'y', 'u', 'i', 'p');
+            //插入元素
+            //this.letters.splice(2, 0, 'y', 'u', 'i', 'p');
+
+            //排序，响应式的
+            //this.letters.sort();
+
+            //翻转
+            //this.letters.reverse();
+
+            //解决索引赋值时不是响应式的问题--可以使用替换
+            //this.letters.splice(0, 0, 'y');
+
+            //Vue提供的方法
+            //set(要修改的对象，索引值， 修改后的值)
+            Vue.set(this.letters, 0, 'YYYY');
+          }
+        }
+      })
+
+
+    /**
+     *
+     * nums定义可变参数，以三个.(...)修饰
+     * @param nums
+     */
+
+    function sum(...nums) {
+
+      console.log(arguments);
+    }
+    sum(12, 43, 43, 55, 55, 22)
+  </script>
+
+  </body>
+</html>
